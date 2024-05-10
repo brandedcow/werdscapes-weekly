@@ -1,37 +1,36 @@
-import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Input } from "../ui/input";
+"use client";
+
+import useProfileStore from "@/store/useProfileStore";
+import { ProfileForm, profileFormValues } from "./profile-form";
+import { useState } from "react";
+import { ProfileInfo } from "./profile-info";
 
 export function ProfileCard() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-xl">Profile</CardTitle>
-        <CardDescription>
-          Enter your player and team names to track stats.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-y-3">
-        <div className="flex flex-col">
-          <div className="flex mt-2">
-            <Input placeholder="Player name" />
-            <Button>Submit</Button>
-          </div>
-        </div>
+  const { playerName, teamName, setPlayerName, setTeamName } =
+    useProfileStore();
+  const isTracking = !!playerName && !!teamName;
+  const [isEdit, setIsEdit] = useState<boolean>(!isTracking);
 
-        <div className="flex flex-col">
-          <div className="flex mt-2">
-            <Input placeholder="Team name" />
-            <Button>Submit</Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+  const handleSubmit = (values: profileFormValues) => {
+    setPlayerName(values.playerName);
+    setTeamName(values.teamName);
+    setIsEdit(false);
+  };
+
+  return (
+    <>
+      {isEdit ? (
+        <ProfileForm
+          onSubmit={handleSubmit}
+          onCancel={() => setIsEdit(false)}
+        />
+      ) : (
+        <ProfileInfo
+          playerName={playerName}
+          teamName={teamName}
+          onEdit={() => setIsEdit(true)}
+        />
+      )}
+    </>
   );
 }
