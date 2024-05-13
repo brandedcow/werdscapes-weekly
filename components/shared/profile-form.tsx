@@ -2,7 +2,7 @@ import useProfileStore from "@/store/useProfileStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl, FormField } from "../ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import {
@@ -51,28 +51,38 @@ export function ProfileForm({ onSubmit, onCancel }: ProfileFormProps) {
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col gap-y-6"
           >
-            <div className="flex flex-col gap-y-3">
+            <div className="flex flex-col gap-y-2">
               <FormField
                 control={form.control}
                 name="playerName"
                 render={({ field }) => (
-                  <FormControl>
-                    <Input placeholder="Player Name" {...field} />
-                  </FormControl>
+                  <FormItem>
+                    <FormLabel>Player ID</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Player Name" {...field} />
+                    </FormControl>
+                  </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
                 name="teamName"
                 render={({ field }) => (
-                  <FormControl>
-                    <Input placeholder="Team Name" {...field} />
-                  </FormControl>
+                  <FormItem>
+                    <FormLabel>Team Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Team Name" {...field} />
+                    </FormControl>
+                  </FormItem>
                 )}
               />
             </div>
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => onCancel()}>
+              <Button
+                variant="outline"
+                onClick={() => onCancel()}
+                disabled={!playerName || !teamName}
+              >
                 Cancel
               </Button>
               <Button type="submit">Track</Button>

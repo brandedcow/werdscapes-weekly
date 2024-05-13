@@ -1,7 +1,6 @@
 import { DarkModeToggle } from "@/components/shared/dark-mode-toggle";
 import { ProfileCard } from "@/components/shared/profile-card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { TeamHistoryCard } from "@/components/shared/team-history-card";
 
 export default function Home() {
   return (
@@ -12,6 +11,8 @@ export default function Home() {
       </div>
 
       <ProfileCard />
+
+      <TeamHistoryCard />
     </main>
   );
 }

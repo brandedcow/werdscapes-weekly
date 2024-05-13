@@ -15,10 +15,12 @@ export const ProfileInfo = ({
 }: ProfileInfoProps) => {
   return (
     <Card>
-      <CardHeader className="flex flex-row justify-between items-end">
+      <CardHeader className="flex flex-row justify-between items-center">
         <div className="flex flex-col">
           <CardTitle>{playerName}</CardTitle>
-          <CardDescription>⛨ {teamName}</CardDescription>
+          <CardDescription className="text-wrap break-all">
+            ⛨ {teamName}
+          </CardDescription>
         </div>
         <Button variant="outline" size="icon" onClick={() => onEdit()}>
           <Edit />
