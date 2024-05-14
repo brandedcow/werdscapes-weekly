@@ -2,7 +2,7 @@
 
 import useProfileStore from "@/store/useProfileStore";
 import { ProfileForm, profileFormValues } from "./profile-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProfileInfo } from "./profile-info";
 
 export function ProfileCard() {
@@ -16,6 +16,10 @@ export function ProfileCard() {
     setTeamName(values.teamName);
     setIsEdit(false);
   };
+
+  useEffect(() => {
+    if (!!playerName && !!teamName) setIsEdit(false);
+  }, [playerName, teamName]);
 
   return (
     <>

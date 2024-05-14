@@ -23,6 +23,7 @@ export const getPlayerTournamentScores = async (
   error?: any;
   success: boolean;
 }> => {
+  if (playerName === "" || !playerName) return { data: [], success: true };
   try {
     const scores = await prisma.score.findMany({
       where: {

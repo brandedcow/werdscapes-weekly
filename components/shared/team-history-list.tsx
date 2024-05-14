@@ -44,7 +44,7 @@ export default function TeamHistoryList({
         {scores.length === 0 ? (
           <CardDescription>
             PeopleFun does not offer a public API to access tournament info.
-            Upload screenshots to add data.
+            Upload screenshots to add data and add your player info to view it.
           </CardDescription>
         ) : (
           <Table>
