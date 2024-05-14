@@ -1,4 +1,6 @@
-import { Calendar, PlusSquare } from "lucide-react";
+"use client";
+
+import { Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -7,16 +9,21 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Calendar } from "../ui/calendar";
+import { previousFriday } from "date-fns";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useProfileStore from "@/store/useProfileStore";
+import { useEffect } from "react";
 
 const teamHistoryFormSchema = z.object({
+  teamName: z.string(),
   date: z.date(),
-  screenshots: z.array(z.string()),
+  screenshots: typeof window === "undefined" ? z.any() : z.instanceof(FileList),
 });
 
 export type teamHistoryFormValues = z.infer<typeof teamHistoryFormSchema>;
@@ -30,12 +37,21 @@ export function TeamHistoryUploadForm({
   onSubmit,
   onCancel,
 }: TeamHistoryUploadFormProps) {
-  const form = useForm<teamHistoryFormValues>({
+  const { teamName } = useProfileStore();
+
+  const form = useForm({
+    resolver: zodResolver(teamHistoryFormSchema),
     defaultValues: {
-      date: new Date(),
-      screenshots: [],
+      teamName,
+      date: previousFriday(new Date()),
     },
   });
+
+  useEffect(() => {
+    if (teamName) {
+      form.setValue("teamName", teamName);
+    }
+  }, [teamName, form]);
 
   return (
     <Card>
@@ -55,6 +71,18 @@ export function TeamHistoryUploadForm({
             <div className="flex flex-col gap-y-2">
               <FormField
                 control={form.control}
+                name="teamName"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Team Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
@@ -66,24 +94,41 @@ export function TeamHistoryUploadForm({
                             variant="outline"
                             className="w-full flex items-center gap-x-1 justify-start"
                           >
-                            <Calendar height={15} width={15} />
+                            <CalendarIcon height={15} width={15} />
                             {field.value.toLocaleDateString()}
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent></PopoverContent>
+                      <PopoverContent>
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={[
+                            (date) =>
+                              date > new Date() ||
+                              date < new Date("1900-01-01"),
+                            { dayOfWeek: [0, 1, 2, 3, 4, 6] },
+                          ]}
+                          initialFocus
+                        />
+                      </PopoverContent>
                     </Popover>
                   </FormItem>
                 )}
               />
               <FormField
-                control={form.control}
                 name="screenshots"
-                render={({ field }) => (
+                render={({ field: { value, onChange, ...fieldProps } }) => (
                   <FormItem>
                     <FormLabel>Screenshots</FormLabel>
                     <FormControl>
-                      <Input id="screenshots" type="file" multiple {...field} />
+                      <Input
+                        {...fieldProps}
+                        type="file"
+                        multiple
+                        onChange={(event) => onChange(event.target.files)}
+                      />
                     </FormControl>
                   </FormItem>
                 )}

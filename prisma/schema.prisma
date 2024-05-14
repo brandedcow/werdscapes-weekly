@@ -19,15 +19,19 @@ model Score {
 
   score Int
 
-  playerId String
-  Player   Player @relation(fields: [playerId], references: [id])
+  playerName String
+  Player     Player @relation(fields: [playerName], references: [name])
 
   tournamentId String
   Tournament   Tournament @relation(fields: [tournamentId], references: [id])
+
+  @@unique([playerName, tournamentId])
 }
 
 model Player {
   id String @id @default(cuid())
+
+  name String @unique
 
   teamId String
   Team   Team   @relation(fields: [teamId], references: [id])
@@ -51,10 +55,14 @@ model Tournament {
   week DateTime
 
   scores Score[]
+
+  @@unique([teamId, week, type])
 }
 
 model Team {
   id String @id @default(cuid())
+
+  name String @unique
 
   players Player[]
 
