@@ -16,7 +16,7 @@ export const ProfileInfo = ({
   return (
     <Card>
       <CardHeader className="flex flex-row justify-between items-center">
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-1.5">
           <CardTitle>{playerName}</CardTitle>
           <CardDescription className="text-wrap break-all">
             ⛨ {teamName}

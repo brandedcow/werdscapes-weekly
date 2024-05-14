@@ -19,6 +19,7 @@ import { previousFriday } from "date-fns";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useProfileStore from "@/store/useProfileStore";
 import { useEffect } from "react";
+import { uploadScreenshot } from "@/actions/uploadScreenshot";
 
 const teamHistoryFormSchema = z.object({
   teamName: z.string(),
@@ -29,12 +30,10 @@ const teamHistoryFormSchema = z.object({
 export type teamHistoryFormValues = z.infer<typeof teamHistoryFormSchema>;
 
 interface TeamHistoryUploadFormProps {
-  onSubmit: (values: any) => void;
   onCancel: () => void;
 }
 
 export function TeamHistoryUploadForm({
-  onSubmit,
   onCancel,
 }: TeamHistoryUploadFormProps) {
   const { teamName } = useProfileStore();
@@ -46,6 +45,18 @@ export function TeamHistoryUploadForm({
       date: previousFriday(new Date()),
     },
   });
+
+  const handleSubmit = async (values: teamHistoryFormValues) => {
+    const formData = new FormData();
+    formData.append("date", values.date.toISOString());
+    formData.append("teamName", values.teamName);
+
+    for (const file of values.screenshots) {
+      formData.append("screenshots", file);
+    }
+
+    await uploadScreenshot(formData);
+  };
 
   useEffect(() => {
     if (teamName) {
@@ -65,7 +76,7 @@ export function TeamHistoryUploadForm({
       <CardContent>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(handleSubmit)}
             className="flex flex-col gap-y-6"
           >
             <div className="flex flex-col gap-y-2">
@@ -136,7 +147,7 @@ export function TeamHistoryUploadForm({
             </div>
 
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => onCancel()}>
+              <Button variant="outline" onClick={onCancel}>
                 Cancel
               </Button>
               <Button type="submit">Upload</Button>
