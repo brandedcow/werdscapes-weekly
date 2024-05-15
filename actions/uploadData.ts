@@ -63,7 +63,7 @@ export const uploadData = async (formData: uploadFormValues) => {
     const message = `Added ${scoreCount} scores for ${team.name} on ${format(
       new Date(week),
       "MMM d, y"
-    )}`;
+    )}.`;
     return { success: true, data: message };
   } catch (error) {
     console.error(error);

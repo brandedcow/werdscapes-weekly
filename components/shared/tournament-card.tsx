@@ -6,21 +6,16 @@ import { CardRightIconHeader } from "../ui/card-right-icon-header";
 import { Button } from "../ui/button";
 import { Edit } from "lucide-react";
 import Link from "next/link";
+import getTournamentById from "@/data/getTournament";
 
 interface TournamentCardProps {
   id: string;
 }
 
 export default async function TournamentCard({ id }: TournamentCardProps) {
-  const tournament = await prisma.tournament.findFirst({
-    where: { id },
-    include: {
-      Team: true,
-      scores: true,
-    },
-  });
+  const { success, data } = await getTournamentById(id);
 
-  if (!tournament) {
+  if (!success || !data) {
     return (
       <Card>
         <CardTitle>No tournament found</CardTitle>
@@ -28,7 +23,7 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
     );
   }
 
-  const { type, week, scoreTotal, Team, scores } = tournament;
+  const { week, scoreTotal, Team, scores } = data;
 
   const tournamentStartDate = new Date(week);
   const tournamentDateRange = `${format(
@@ -40,10 +35,10 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
     <Card>
       <CardRightIconHeader
         title={Team.name}
-        description={format(tournamentStartDate, "MMMM d, y")}
+        description={tournamentDateRange}
         renderIcon={() => (
           <Button variant="outline" size="icon">
-            <Link href={`/dashboard/tournaments/${id}/edit`}>
+            <Link href={`/dashboard/team-tournament/edit/${id}`}>
               <Edit />
             </Link>
           </Button>

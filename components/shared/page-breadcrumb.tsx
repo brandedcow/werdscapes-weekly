@@ -11,7 +11,7 @@ import {
 import { toCapitalCase } from "@/lib/utils";
 import { v4 } from "uuid";
 
-const pages = ["dashboard", "team-tournament", "upload-screenshots"];
+const pages = ["dashboard", "team-tournament", "upload-screenshots", "edit"];
 
 export function PageBreadcrumb() {
   const pathname = usePathname();

@@ -142,8 +142,8 @@ export default function UploadForm() {
         <>
           <FormLabel>Scores</FormLabel>
           {fields.map((field, index) => (
-            <div className="flex flex-col">
-              <div key={field.id} className="flex gap-x-2 items-center">
+            <div key={field.id} className="flex flex-col">
+              <div className="flex gap-x-2 items-center">
                 <FormLabel htmlFor={`scores.${index}.name`}>
                   {index + 1}.
                 </FormLabel>

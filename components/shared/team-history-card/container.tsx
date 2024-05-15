@@ -57,8 +57,12 @@ export async function TeamHistoryCard({}) {
             </TableHeader>
             <TableBody>
               {tournaments.map(({ id, week, Team, scoreTotal }) => (
-                <Link legacyBehavior href={`/dashboard/team-tournament/${id}`}>
-                  <TableRow key={v4()} className="hover:cursor-pointer">
+                <Link
+                  key={v4()}
+                  legacyBehavior
+                  href={`/dashboard/team-tournament/${id}`}
+                >
+                  <TableRow className="hover:cursor-pointer">
                     <TableCell>{format(new Date(week), "MMM d, y")}</TableCell>
                     <TableCell>{Team.name}</TableCell>
                     <TableCell>{scoreTotal}</TableCell>
