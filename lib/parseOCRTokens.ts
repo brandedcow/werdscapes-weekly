@@ -1,9 +1,16 @@
 import { OcrSpaceResponse } from "ocr-space-api-wrapper";
 
-export function parseOCRTokens(ocrResult: OcrSpaceResponse) {
+export type ParseOCRTokenResult = {
+  [playerName: string]: string;
+};
+
+export function parseOCRTokens(
+  ocrResult: OcrSpaceResponse
+): ParseOCRTokenResult {
   let tokens = ocrResult.ParsedResults[0].ParsedText.split("\t")
     .map((token) => token.replace("\r\n", ""))
-    .filter((token) => token !== "" && token !== "0");
+    .filter((token) => token !== "" && token !== "0")
+    .filter((token) => /^[A-Za-z0-9]*$/.test(token));
 
   const adjustedTokens = pairElements(addZeroScores(tokens));
 
