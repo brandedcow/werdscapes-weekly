@@ -84,7 +84,7 @@ export default function UploadForm() {
     for (const [name, score] of Object.entries(data)) {
       append({ name, score });
     }
-  }, [data]);
+  }, [data, append]);
 
   return (
     <Form {...form}>

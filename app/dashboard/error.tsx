@@ -24,12 +24,12 @@ export default function Error({
   }, [error]);
 
   const animals = [
-    <Snail />,
-    <Cat />,
-    <Dog />,
-    <Rabbit />,
-    <Squirrel />,
-    <Turtle />,
+    <Snail key={v4()} />,
+    <Cat key={v4()} />,
+    <Dog key={v4()} />,
+    <Rabbit key={v4()} />,
+    <Squirrel key={v4()} />,
+    <Turtle key={v4()} />,
   ];
 
   const randomAnimal = animals[parseInt(v4()) % animals.length];
@@ -43,7 +43,7 @@ export default function Error({
             {randomAnimal}
           </div>
           <CardDescription>
-            It's probably us not you, please try and reload
+            {"It's probably us not you, please try and reload."}
           </CardDescription>
         </div>
 
