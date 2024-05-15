@@ -11,25 +11,26 @@ import {
 import { toCapitalCase } from "@/lib/utils";
 import { v4 } from "uuid";
 
+const pages = ["dashboard", "team-tournament", "upload-screenshots"];
+
 export function PageBreadcrumb() {
   const pathname = usePathname();
-  const breadcrumbItems = pathname.split("/").filter((item) => !!item);
+  const breadcrumbItems = pathname
+    .split("/")
+    .filter((item) => !!item)
+    .filter((item) => pages.includes(item));
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
         {breadcrumbItems.map((item, index) => (
-          <div key={v4()}>
+          <div key={v4()} className="flex items-center">
             <BreadcrumbItem key={index}>
               <BreadcrumbLink href={`/${item}`}>
                 {toCapitalCase(item)}
               </BreadcrumbLink>
             </BreadcrumbItem>
-            {index !== breadcrumbItems.length - 1 && (
-              <BreadcrumbItem key={index}>
-                <BreadcrumbSeparator />
-              </BreadcrumbItem>
-            )}
+            {index !== breadcrumbItems.length - 1 && <BreadcrumbSeparator />}
           </div>
         ))}
       </BreadcrumbList>

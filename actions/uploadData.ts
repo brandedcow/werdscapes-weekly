@@ -50,6 +50,7 @@ export const uploadData = async (formData: uploadFormValues) => {
       )
     );
 
+    // TODO: ensure highest score is chosen for duplicates, upsert instead of createmany
     const { count: scoreCount } = await prisma.score.createMany({
       data: scores.map(({ name, score }) => ({
         playerName: name,

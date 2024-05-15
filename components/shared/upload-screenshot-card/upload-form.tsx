@@ -65,6 +65,7 @@ export default function UploadForm() {
     const { success, data } = await uploadData(values);
 
     if (success && data) {
+      form.reset();
       // TODO: ensure toast is shown
       toast({
         title: "Upload Successful",

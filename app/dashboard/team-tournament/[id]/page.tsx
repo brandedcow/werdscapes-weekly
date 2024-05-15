@@ -1,13 +1,16 @@
 import { PageBreadcrumb } from "@/components/shared/page-breadcrumb";
 import { ProfileCard } from "@/components/shared/profile-card/container";
-import { UploadScreenshotCard } from "@/components/shared/upload-screenshot-card/container";
+import TournamentCard from "@/components/shared/tournament-card";
 
-export default function UploadScreenshotsPage() {
+export default function TournamentDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   return (
     <>
       <PageBreadcrumb />
-      <ProfileCard />
-      <UploadScreenshotCard />
+      <TournamentCard id={params.id} />
     </>
   );
 }

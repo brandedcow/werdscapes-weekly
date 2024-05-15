@@ -20,7 +20,8 @@ import { PlusSquare } from "lucide-react";
 import Link from "next/link";
 import { v4 } from "uuid";
 
-export async function TeamHistoryCard() {
+export async function TeamHistoryCard({}) {
+  // TODO: sort tournaments by date, include options in table to sort
   const tournaments = await prisma.tournament.findMany({
     where: {},
     include: {
@@ -55,12 +56,14 @@ export async function TeamHistoryCard() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {tournaments.map(({ week, Team, scoreTotal }) => (
-                <TableRow key={v4()}>
-                  <TableCell>{format(new Date(week), "MMM d, y")}</TableCell>
-                  <TableCell>{Team.name}</TableCell>
-                  <TableCell>{scoreTotal}</TableCell>
-                </TableRow>
+              {tournaments.map(({ id, week, Team, scoreTotal }) => (
+                <Link legacyBehavior href={`/dashboard/team-tournament/${id}`}>
+                  <TableRow key={v4()} className="hover:cursor-pointer">
+                    <TableCell>{format(new Date(week), "MMM d, y")}</TableCell>
+                    <TableCell>{Team.name}</TableCell>
+                    <TableCell>{scoreTotal}</TableCell>
+                  </TableRow>
+                </Link>
               ))}
             </TableBody>
           </Table>
