@@ -6,8 +6,10 @@ export default async function getTournaments() {
   try {
     const data = await prisma.tournament.findMany({
       where: {},
+      orderBy: {
+        week: "desc",
+      },
       include: {
-        scores: true,
         Team: true,
       },
     });

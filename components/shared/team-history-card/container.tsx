@@ -6,28 +6,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { prisma } from "@/lib/db";
-import { format } from "date-fns";
 import { PlusSquare } from "lucide-react";
 import Link from "next/link";
-import { v4 } from "uuid";
+import { TeamTournamentList } from "./team-tournament-list";
+import getTournaments from "@/data/getTournaments";
 
 export async function TeamHistoryCard({}) {
   // TODO: sort tournaments by date, include options in table to sort
-  const tournaments = await prisma.tournament.findMany({
-    where: {},
-    include: {
-      Team: true,
-    },
-  });
+  const { success, data } = await getTournaments();
 
   return (
     <Card>
@@ -40,37 +27,14 @@ export async function TeamHistoryCard({}) {
         </Button>
       </CardHeader>
       <CardContent>
-        {tournaments.length === 0 ? (
+        {!success || !data ? (
           <CardDescription>
             PeopleFun does not offer a public API to access tournament info.
             Upload screenshots to add data, and add your player info to filter
             results.
           </CardDescription>
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Date</TableHead>
-                <TableHead>Team Name</TableHead>
-                <TableHead>Score</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {tournaments.map(({ id, week, Team, scoreTotal }) => (
-                <Link
-                  key={v4()}
-                  legacyBehavior
-                  href={`/dashboard/team-tournament/${id}`}
-                >
-                  <TableRow className="hover:cursor-pointer">
-                    <TableCell>{format(new Date(week), "MMM d, y")}</TableCell>
-                    <TableCell>{Team.name}</TableCell>
-                    <TableCell>{scoreTotal}</TableCell>
-                  </TableRow>
-                </Link>
-              ))}
-            </TableBody>
-          </Table>
+          <TeamTournamentList tournaments={data} />
         )}
       </CardContent>
     </Card>
