@@ -54,6 +54,8 @@ model Tournament {
 
   week DateTime
 
+  scoreTotal Int
+
   scores Score[]
 
   @@unique([teamId, week, type])
