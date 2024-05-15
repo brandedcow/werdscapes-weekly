@@ -12,25 +12,40 @@ import { toCapitalCase } from "@/lib/utils";
 import { v4 } from "uuid";
 
 const pages = ["dashboard", "team-tournament", "upload-screenshots", "edit"];
+const pagesWithId = ["team-tournament", "edit"];
 
 export function PageBreadcrumb() {
   const pathname = usePathname();
-  const breadcrumbItems = pathname
-    .split("/")
-    .filter((item) => !!item)
-    .filter((item) => pages.includes(item));
+  // Pathname: /dashboard/team-tournament/edit/clw7drcz700025mhz5ydcksy7
+  // => /dashboard
+  // => /dashboard/team-tournament/${id}
+  // => /dashboard/team-tournament/edit/${id}
+
+  const pathnameTokens = pathname.split("/").filter((item) => !!item) ?? [];
+  const breadCrumbPages = pathnameTokens.filter((token) =>
+    pages.includes(token)
+  );
+  const id =
+    breadCrumbPages.length < pathnameTokens.length
+      ? pathnameTokens[pathnameTokens.length - 1]
+      : null;
+  const breadcrumbPaths = breadCrumbPages.map((page, index) => {
+    let path = "/" + pathnameTokens.slice(0, index + 1).join("/");
+    if (pagesWithId.includes(page) && !!id) {
+      path += `/${id}`;
+    }
+    return { path, page };
+  });
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {breadcrumbItems.map((item, index) => (
+        {breadcrumbPaths.map(({ path, page }, index) => (
           <div key={v4()} className="flex items-center">
-            <BreadcrumbItem key={index}>
-              <BreadcrumbLink href={`/${item}`}>
-                {toCapitalCase(item)}
-              </BreadcrumbLink>
+            <BreadcrumbItem>
+              <BreadcrumbLink href={path}>{toCapitalCase(page)}</BreadcrumbLink>
             </BreadcrumbItem>
-            {index !== breadcrumbItems.length - 1 && <BreadcrumbSeparator />}
+            {index !== breadcrumbPaths.length - 1 && <BreadcrumbSeparator />}
           </div>
         ))}
       </BreadcrumbList>
