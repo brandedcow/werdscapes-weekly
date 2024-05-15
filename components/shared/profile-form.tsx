@@ -1,4 +1,4 @@
-import useProfileStore from "@/store/useProfileStore";
+import useProfileStore from "@/data/useProfileStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

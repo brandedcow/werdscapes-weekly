@@ -1,6 +1,6 @@
 "use client";
 
-import useProfileStore from "@/store/useProfileStore";
+import useProfileStore from "@/data/useProfileStore";
 import { ProfileForm, profileFormValues } from "./profile-form";
 import { useEffect, useState } from "react";
 import { ProfileInfo } from "./profile-info";
