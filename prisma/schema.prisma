@@ -49,16 +49,18 @@ model Tournament {
 
   type TournamentType @default(Team)
 
-  teamId String
-  Team   Team   @relation(fields: [teamId], references: [id])
+  teamName String
+  Team     Team   @relation(fields: [teamName], references: [name])
 
   week DateTime
 
   scoreTotal Int
 
+  place Int @default(0)
+
   scores Score[]
 
-  @@unique([teamId, week, type])
+  @@unique([teamName, week, type])
 }
 
 model Team {
