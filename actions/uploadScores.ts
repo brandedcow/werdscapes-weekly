@@ -3,11 +3,11 @@
 import { prisma } from "@/lib/db";
 import { TournamentType } from "@prisma/client";
 import { format } from "date-fns";
-import { uploadFormValues } from "@/components/shared/upload-screenshot-card/upload-form";
+import { uploadScoresFormValues } from "@/components/shared/upload-screenshot-card/upload-scores-form";
 
-export const uploadData = async (formData: uploadFormValues) => {
+export const uploadScores = async (formData: uploadScoresFormValues) => {
   try {
-    const { scores, teamName, week } = formData;
+    const { scores, teamName, week, place } = formData;
 
     const team = await prisma.team.upsert({
       where: { name: teamName },
@@ -22,16 +22,17 @@ export const uploadData = async (formData: uploadFormValues) => {
 
     const tournament = await prisma.tournament.upsert({
       where: {
-        teamId_week_type: {
-          teamId: team.id,
+        teamName_week_type: {
+          teamName,
           week,
           type: TournamentType.Team,
         },
       },
       create: {
         type: TournamentType.Team,
-        teamId: team.id,
+        teamName,
         week,
+        place,
         scores: {},
         scoreTotal,
       },
@@ -39,7 +40,7 @@ export const uploadData = async (formData: uploadFormValues) => {
     });
 
     await prisma.$transaction(
-      scores.map(({ name, score }) =>
+      scores.map(({ name }) =>
         prisma.player.upsert({
           where: {
             name,
@@ -50,17 +51,26 @@ export const uploadData = async (formData: uploadFormValues) => {
       )
     );
 
-    // TODO: ensure highest score is chosen for duplicates, upsert instead of createmany
-    const { count: scoreCount } = await prisma.score.createMany({
-      data: scores.map(({ name, score }) => ({
-        playerName: name,
-        score: parseInt(score),
-        tournamentId: tournament.id,
-      })),
-      skipDuplicates: true,
-    });
+    await prisma.$transaction(
+      scores.map(({ name, score }) =>
+        prisma.score.upsert({
+          where: {
+            playerName_tournamentId: {
+              playerName: name,
+              tournamentId: tournament.id,
+            },
+          },
+          create: {
+            playerName: name,
+            score: parseInt(score),
+            tournamentId: tournament.id,
+          },
+          update: {},
+        })
+      )
+    );
 
-    const message = `Added ${scoreCount} scores for ${team.name} on ${format(
+    const message = `Added ${scores.length} scores for ${team.name} on ${format(
       new Date(week),
       "MMM d, y"
     )}.`;

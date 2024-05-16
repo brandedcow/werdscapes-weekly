@@ -27,7 +27,7 @@ export function TeamTournamentList({
         type="tournaments"
         description="There is no tournament data to be seen here. Since there is no public
     API to fetch it for us, to see data, please upload manually."
-        linkHref="/dashboard/upload-screenshots"
+        linkHref="/dashboard/upload-scores"
         buttonLabel="Upload Scores"
       />
     );

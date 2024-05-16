@@ -14,7 +14,7 @@ export async function TeamHistoryCard({}) {
       <CardHeader className="flex-row items-center justify-between">
         <CardTitle>Team Tournament History</CardTitle>
         <Button size="icon" variant="outline">
-          <Link href="/dashboard/upload-screenshots">
+          <Link href="/dashboard/upload-scores">
             <PlusSquare />
           </Link>
         </Button>
