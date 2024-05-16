@@ -20,7 +20,7 @@ export async function EditTournamentCard({ id }: EditTournamentCardProps) {
     );
   }
 
-  const { week, Team, scores } = data;
+  const { week, Team, scores, place } = data;
 
   const defaultValues: editTournamentFormValues = {
     scores: scores.map((score) => ({
@@ -29,6 +29,7 @@ export async function EditTournamentCard({ id }: EditTournamentCardProps) {
     })),
     week,
     teamName: Team.name,
+    place,
   };
 
   return (

@@ -23,7 +23,7 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
     );
   }
 
-  const { week, scoreTotal, Team, scores } = data;
+  const { week, scoreTotal, Team, scores, place } = data;
 
   const tournamentStartDate = new Date(week);
   const tournamentDateRange = `${format(
@@ -34,7 +34,7 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
   return (
     <Card>
       <CardRightIconHeader
-        title={Team.name}
+        title={`#${place} ${Team.name}`}
         description={tournamentDateRange}
         renderIcon={() => (
           <Button variant="outline" size="icon">

@@ -9,6 +9,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -31,12 +32,15 @@ import { z } from "zod";
 const uploadFormSchema = z.object({
   teamName: z.string(),
   week: z.date(),
-  scores: z.array(
-    z.object({
-      name: z.string(),
-      score: z.string(),
-    })
-  ),
+  place: z.coerce.number().min(1),
+  scores: z
+    .array(
+      z.object({
+        name: z.string(),
+        score: z.string(),
+      })
+    )
+    .min(1),
 });
 
 export type uploadFormValues = z.infer<typeof uploadFormSchema>;
@@ -52,6 +56,7 @@ export default function UploadForm() {
     defaultValues: {
       teamName: teamName ?? "Creased",
       week: previousFriday(new Date()),
+      place: 0,
       scores: [],
     },
   });
@@ -139,57 +144,73 @@ export default function UploadForm() {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="place"
+          render={({ field, fieldState }) => (
+            <FormItem>
+              <FormLabel>Place</FormLabel>
+              <FormControl>
+                <Input type="number" {...field} />
+              </FormControl>
+              <FormMessage>{fieldState.error?.message}</FormMessage>
+            </FormItem>
+          )}
+        />
         <>
-          <FormLabel>Scores</FormLabel>
-          {fields.map((field, index) => (
-            <div key={field.id} className="flex flex-col">
-              <div className="flex gap-x-2 items-center">
-                <FormLabel htmlFor={`scores.${index}.name`}>
-                  {index + 1}.
-                </FormLabel>
-                <FormField
-                  control={form.control}
-                  name={`scores.${index}.name`}
-                  render={({ field: formfield }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="Rock" {...formfield} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={`scores.${index}.score`}
-                  render={({ field: formfield }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="0" {...formfield} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  type="button"
-                  onClick={() => remove(index)}
-                >
-                  <Trash2 />
-                </Button>
-              </div>
-            </div>
-          ))}
+          <FormField
+            control={form.control}
+            name="scores"
+            render={({ fieldState }) => (
+              <FormItem>
+                <FormLabel>Scores</FormLabel>
+                <FormControl>
+                  {fields.map((field, index) => (
+                    <div key={field.id} className="flex flex-col">
+                      <div className="flex gap-x-2 items-center">
+                        <FormLabel htmlFor={`scores.${index}.name`}>
+                          {index + 1}.
+                        </FormLabel>
+                        <FormField
+                          control={form.control}
+                          name={`scores.${index}.name`}
+                          render={({ field: formfield }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="Rock" {...formfield} />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name={`scores.${index}.score`}
+                          render={({ field: formfield }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="0" {...formfield} />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          type="button"
+                          onClick={() => remove(index)}
+                        >
+                          <Trash2 />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </FormControl>
+                <FormMessage>{fieldState.error?.message}</FormMessage>
+              </FormItem>
+            )}
+          />
         </>
         <div className="flex justify-between">
-          <Button
-            variant="destructive"
-            type="button"
-            onClick={() => form.reset()}
-          >
-            <ListPlus height={18} width={18} className="mr-1" />
-            Clear Scores
-          </Button>
           <Button
             variant="secondary"
             type="button"
@@ -197,6 +218,14 @@ export default function UploadForm() {
           >
             <ListPlus height={18} width={18} className="mr-1" />
             Add Score
+          </Button>
+          <Button
+            variant="destructive"
+            type="button"
+            onClick={() => form.reset()}
+          >
+            <ListPlus height={18} width={18} className="mr-1" />
+            Clear Scores
           </Button>
         </div>
         <Button

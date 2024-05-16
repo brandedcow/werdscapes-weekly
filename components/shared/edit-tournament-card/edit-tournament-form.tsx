@@ -22,13 +22,13 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, ListPlus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const editTournamentFormSchema = z.object({
-  teamName: z.string(),
+  teamName: z.string().min(1),
   week: z.date(),
+  place: z.coerce.number().min(1),
   scores: z.array(
     z.object({
       playerName: z.string(),
@@ -62,7 +62,6 @@ export function EditTournamentForm({
   });
 
   const handleSubmit = async (values: editTournamentFormValues) => {
-    console.log("submit");
     const { success, data } = await updateTournament({ id, ...values });
 
     if (success && data) {
@@ -76,10 +75,6 @@ export function EditTournamentForm({
     }
   };
 
-  useEffect(() => {
-    console.log(form.formState.errors);
-  }, [form.formState.errors]);
-
   return (
     <Form {...form}>
       <form
@@ -89,12 +84,13 @@ export function EditTournamentForm({
         <FormField
           control={form.control}
           name="teamName"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
               <FormLabel>Team Name</FormLabel>
               <FormControl>
                 <Input placeholder="Bridge Four" {...field} />
               </FormControl>
+              <FormMessage>{fieldState.error?.message}</FormMessage>
             </FormItem>
           )}
         />
@@ -130,6 +126,19 @@ export function EditTournamentForm({
                   />
                 </PopoverContent>
               </Popover>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="place"
+          render={({ field, fieldState }) => (
+            <FormItem>
+              <FormLabel>Place</FormLabel>
+              <FormControl>
+                <Input type="number" {...field} />
+              </FormControl>
+              <FormMessage>{fieldState.error?.message}</FormMessage>
             </FormItem>
           )}
         />

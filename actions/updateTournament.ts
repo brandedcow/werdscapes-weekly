@@ -8,7 +8,7 @@ export const updateTournament = async (
   values: editTournamentFormValues & { id: string }
 ) => {
   try {
-    const { id, teamName, week, scores } = values;
+    const { id, teamName, week, scores, place } = values;
 
     const scoreTotal = scores.reduce(
       (acc, { score }) => acc + parseInt(score),
@@ -18,6 +18,7 @@ export const updateTournament = async (
     const tournament = await prisma.tournament.update({
       where: { id },
       data: {
+        place,
         week,
         scoreTotal,
         Team: {
