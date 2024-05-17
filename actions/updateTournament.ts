@@ -2,32 +2,35 @@
 
 import { editTournamentFormValues } from "@/components/shared/edit-tournament-card/edit-tournament-form";
 import { prisma } from "@/lib/db";
-import { format } from "date-fns";
+import { format, startOfDay } from "date-fns";
 
 export const updateTournament = async (
   values: editTournamentFormValues & { id: string }
 ) => {
+  const { id, teamName, week, scores, place } = values;
+  const scoreTotal = scores.reduce(
+    (acc, { score }) => acc + parseInt(score),
+    0
+  );
+
   try {
-    const { id, teamName, week, scores, place } = values;
-
-    const scoreTotal = scores.reduce(
-      (acc, { score }) => acc + parseInt(score),
-      0
-    );
-
     const tournament = await prisma.tournament.update({
       where: { id },
       data: {
         place,
         week,
         scoreTotal,
-        Team: {
-          update: { name: teamName },
-        },
+        teamName,
         scores: {
-          update: scores.map(({ id, score, playerName }) => ({
-            where: { id },
-            data: { playerName, score: parseInt(score) },
+          upsert: scores.map(({ score, playerName }) => ({
+            where: {
+              playerName_tournamentId: {
+                playerName,
+                tournamentId: id,
+              },
+            },
+            create: { playerName, score: parseInt(score) },
+            update: { score: parseInt(score) },
           })),
         },
       },
@@ -38,8 +41,18 @@ export const updateTournament = async (
       "MMM d, y"
     )} tournament.`;
     return { success: true, data: message };
-  } catch (error) {
-    console.error("updateTournament", error);
-    return { success: false, error };
+  } catch (error: any) {
+    console.error("updateTournament", JSON.stringify(error, null, 2));
+
+    let errorMessage = "";
+
+    if (error.code === "P2002") {
+      errorMessage = `A tournament for ${teamName} on ${format(
+        new Date(week),
+        "MMM d, y"
+      )} already exists.`;
+    }
+
+    return { success: false, error: errorMessage };
   }
 };

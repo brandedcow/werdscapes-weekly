@@ -50,7 +50,7 @@ model Tournament {
   type TournamentType @default(Team)
 
   teamName String
-  Team     Team   @relation(fields: [teamName], references: [name])
+  Team   Team   @relation(fields: [teamName], references: [name])
 
   week DateTime
 

@@ -18,7 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useToast } from "@/components/ui/use-toast";
-import { cn } from "@/lib/utils";
+import { cn, zodInputStringPipe } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, ListPlus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -28,14 +28,16 @@ import { z } from "zod";
 const editTournamentFormSchema = z.object({
   teamName: z.string().min(1),
   week: z.date(),
-  place: z.coerce.number().min(1),
-  scores: z.array(
-    z.object({
-      playerName: z.string(),
-      score: z.string(),
-      id: z.string(),
-    })
-  ),
+  place: zodInputStringPipe(z.coerce.number().positive()),
+  scores: z
+    .array(
+      z.object({
+        playerName: z.string().min(1),
+        score: zodInputStringPipe(z.coerce.number().nonnegative()),
+        id: z.string(),
+      })
+    )
+    .min(1),
 });
 
 export type editTournamentFormValues = z.infer<typeof editTournamentFormSchema>;
@@ -62,16 +64,28 @@ export function EditTournamentForm({
   });
 
   const handleSubmit = async (values: editTournamentFormValues) => {
-    const { success, data } = await updateTournament({ id, ...values });
-
-    if (success && data) {
-      form.reset();
-      toast({
-        title: "Success",
-        description: data,
+    try {
+      const { success, data, error } = await updateTournament({
+        id,
+        ...values,
       });
+      if (success && data) {
+        form.reset();
+        toast({
+          title: "Success",
+          description: data,
+        });
 
-      router.push(`/dashboard/team-tournament/${id}`);
+        router.push(`/dashboard/team-tournament/${id}`);
+      } else {
+        toast({
+          title: "Uh Oh..",
+          description: error,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.warn(error);
     }
   };
 
@@ -142,62 +156,81 @@ export function EditTournamentForm({
             </FormItem>
           )}
         />
-        <div>
-          <FormLabel>Scores</FormLabel>
-          <div className="flex flex-col mt-2 gap-y-2">
-            {fields.map((field, index) => (
-              <div key={field.id} className="flex flex-col">
-                <div key={field.id} className="flex gap-x-2 items-center">
-                  <FormLabel htmlFor={`scores.${index}.name`}>
-                    {index + 1}.
-                  </FormLabel>
-                  <FormField
-                    control={form.control}
-                    name={`scores.${index}.playerName`}
-                    render={({ field: formfield }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input placeholder="Rock" {...formfield} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name={`scores.${index}.score`}
-                    render={({ field: formfield, fieldState }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input type="number" placeholder="0" {...formfield} />
-                        </FormControl>
-                        <FormMessage>{fieldState.error?.message}</FormMessage>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name={`scores.${index}.id`}
-                    render={({ field: formfield }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input type="hidden" {...formfield} />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    type="button"
-                    onClick={() => remove(index)}
-                  >
-                    <Trash2 />
-                  </Button>
+        <FormField
+          control={form.control}
+          name="scores"
+          render={({ fieldState }) => (
+            <FormItem>
+              <FormLabel>Scores</FormLabel>
+              {fields.map((field, index) => (
+                <div key={field.id} className="flex flex-col">
+                  <div className="flex gap-x-2 items-center">
+                    <FormLabel htmlFor={`scores.${index}.name`}>
+                      {index + 1}.
+                    </FormLabel>
+                    <FormField
+                      control={form.control}
+                      name={`scores.${index}.playerName`}
+                      render={({
+                        field: formfield,
+                        fieldState: formfieldstate,
+                      }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input placeholder="Rock" {...formfield} />
+                          </FormControl>
+                          <FormMessage>
+                            {formfieldstate.error?.message}
+                          </FormMessage>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`scores.${index}.score`}
+                      render={({
+                        field: formfield,
+                        fieldState: formfieldstate,
+                      }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              {...formfield}
+                            />
+                          </FormControl>
+                          <FormMessage>
+                            {formfieldstate.error?.message}
+                          </FormMessage>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`scores.${index}.id`}
+                      render={({ field: formfield }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input type="hidden" {...formfield} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      type="button"
+                      onClick={() => remove(index)}
+                    >
+                      <Trash2 />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
+              ))}
+            </FormItem>
+          )}
+        />
         <div className="flex flex-col gap-y-6 mt-4">
           <div className="flex justify-between">
             <Button
@@ -209,12 +242,12 @@ export function EditTournamentForm({
               Add Score
             </Button>
             <Button
-              variant="destructive"
+              variant="outline"
               type="button"
               onClick={() => form.reset()}
             >
               <ListPlus height={18} width={18} className="mr-1" />
-              Clear Scores
+              Reset Scores
             </Button>
           </div>
           <Button

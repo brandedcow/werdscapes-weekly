@@ -29,7 +29,7 @@ export async function EditTournamentCard({ id }: EditTournamentCardProps) {
     })),
     week,
     teamName: Team.name,
-    place,
+    place: place.toString(),
   };
 
   return (

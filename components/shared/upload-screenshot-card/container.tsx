@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { OCRForm } from "./ocr-form";
 import UploadForm from "./upload-scores-form";
+import { Separator } from "@/components/ui/separator";
 
 export function UploadScreenshotCard() {
   return (
@@ -16,11 +17,13 @@ export function UploadScreenshotCard() {
         <CardDescription>
           PeopleFun does not offer a public API to access tournament info.
           Upload screenshots to scan data. You may need to adjust incorrectly
-          scanned scores.
+          scanned scores. Be patient with the upload process, can take up to a
+          minute.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-6">
         <OCRForm />
+        <Separator />
         <UploadForm />
       </CardContent>
     </Card>

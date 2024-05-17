@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { Edit } from "lucide-react";
 import Link from "next/link";
 import getTournamentById from "@/data/getTournament";
+import { NoDataFound } from "./no-data-found";
 
 interface TournamentCardProps {
   id: string;
@@ -17,9 +18,13 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
 
   if (!success || !data) {
     return (
-      <Card>
-        <CardTitle>No tournament found</CardTitle>
-      </Card>
+      <NoDataFound
+        type="tournament"
+        description="There is no tournament data to be seen here. Since there is no public
+    API to fetch it for us, to see data, please upload manually."
+        linkHref="/dashboard/upload-scores"
+        buttonLabel="Upload Scores"
+      />
     );
   }
 

@@ -29,11 +29,9 @@ export const uploadScores = async (formData: uploadScoresFormValues) => {
         },
       },
       create: {
-        type: TournamentType.Team,
         teamName,
         week,
         place,
-        scores: {},
         scoreTotal,
       },
       update: {},
@@ -74,9 +72,11 @@ export const uploadScores = async (formData: uploadScoresFormValues) => {
       new Date(week),
       "MMM d, y"
     )}.`;
+
     return { success: true, data: message };
-  } catch (error) {
-    console.error(error);
-    return { success: false, error };
+  } catch (error: any) {
+    console.error("uploadScores", JSON.stringify(error, null, 2));
+    let errorMessage = "Something went wrong while uploading scores.";
+    return { success: false, error: errorMessage };
   }
 };
