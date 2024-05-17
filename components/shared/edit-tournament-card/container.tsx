@@ -6,6 +6,8 @@ import {
 import getTournamentById from "@/data/getTournamentById";
 import { CardRightIconHeader } from "@/components/ui/card-right-icon-header";
 import { DeleteTournamentButton } from "../delete-tournament-button";
+import { EditScoresForm } from "./edit-scores-form";
+import { Separator } from "@/components/ui/separator";
 
 interface EditTournamentCardProps {
   id: string;
@@ -25,10 +27,6 @@ export async function EditTournamentCard({ id }: EditTournamentCardProps) {
   const { week, Team, scores, place } = data;
 
   const defaultValues: editTournamentFormValues = {
-    scores: scores.map((score) => ({
-      ...score,
-      score: score.score.toString(),
-    })),
     week,
     teamName: Team.name,
     place: place.toString(),
@@ -42,6 +40,17 @@ export async function EditTournamentCard({ id }: EditTournamentCardProps) {
       />
       <CardContent>
         <EditTournamentForm id={id} defaultValues={defaultValues} />
+        <Separator className="my-6" />
+        <EditScoresForm
+          teamId={Team.id}
+          tournamentId={id}
+          defaultValues={{
+            scores: scores.map((score) => ({
+              ...score,
+              score: score.score.toString(),
+            })),
+          }}
+        />
       </CardContent>
     </Card>
   );

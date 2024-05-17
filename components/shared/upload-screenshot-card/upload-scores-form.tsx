@@ -61,7 +61,7 @@ export default function UploadScoresForm() {
     },
   });
 
-  const { fields, append, remove } = useFieldArray<any>({
+  const { fields, append, remove, replace } = useFieldArray<any>({
     name: "scores",
     control: form.control,
   });
@@ -85,13 +85,20 @@ export default function UploadScoresForm() {
     }
   };
 
+  const handleSortScoreFields = () => {
+    const { scores } = form.getValues();
+    const sortedScores = scores.toSorted((a, b) =>
+      parseInt(a.score) - parseInt(b.score) > 0 ? -1 : 1
+    );
+    replace(sortedScores);
+  };
+
   const resetFormAndStore = () => {
     form.reset();
     clear();
   };
 
   useEffect(() => {
-    // set up dynamic form when data changes
     for (const [name, score] of Object.entries(data)) {
       append({ name, score });
     }
@@ -237,8 +244,15 @@ export default function UploadScoresForm() {
             Add Score
           </Button>
           <Button
-            variant="destructive"
             type="button"
+            variant="outline"
+            onClick={handleSortScoreFields}
+          >
+            Sort Scores
+          </Button>
+          <Button
+            variant="destructive"
+            type="reset"
             onClick={() => resetFormAndStore()}
           >
             <ListPlus height={18} width={18} className="mr-1" />
