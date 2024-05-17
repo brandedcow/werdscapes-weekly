@@ -22,8 +22,11 @@ export default async function getStreaksByPlayerId(playerId: string) {
             "Score"
             inner join "Tournament" on "Tournament".id = "Score"."tournamentId"
             inner join "Player" on "Player".name = "Score"."playerName"
+          where
+            "Score".score <> 0
           order by
             week asc
+          
         ),
         with_previous_week as (
           select

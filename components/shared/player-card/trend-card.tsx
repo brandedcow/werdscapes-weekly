@@ -15,7 +15,7 @@ export function TrendCard({ name, value, ...restOfProps }: TrendCardProps) {
     <Card {...restOfProps}>
       <CardHeader className="flex flex-col justify-between">
         <CardDescription>{name}</CardDescription>
-        <CardTitle>{value}</CardTitle>
+        <CardTitle>{Math.round(value * 100) / 100}</CardTitle>
       </CardHeader>
     </Card>
   );
