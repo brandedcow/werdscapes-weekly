@@ -49,7 +49,9 @@ export function PageBreadcrumb() {
         {breadcrumbPaths.map(({ path, page }, index) => (
           <div key={v4()} className="flex items-center">
             <BreadcrumbItem>
-              <BreadcrumbLink href={path}>{toCapitalCase(page)}</BreadcrumbLink>
+              <BreadcrumbLink href={path}>
+                {toCapitalCase(page, { from: "kebab-case" })}
+              </BreadcrumbLink>
             </BreadcrumbItem>
             {index !== breadcrumbPaths.length - 1 && <BreadcrumbSeparator />}
           </div>

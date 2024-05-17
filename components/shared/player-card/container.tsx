@@ -42,9 +42,8 @@ export async function PlayerCard({ id }: PlayerCardProps) {
         <CardTitle>{player.name}</CardTitle>
         <CardDescription>⛨ {player.Team.name}</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-y-2">
-        {/* <TrendsInfo /> */}
-
+      <CardContent className="flex flex-col gap-y-4">
+        <TrendsInfo playerId={id} />
         <ScoreLineChart scores={lineGraphData} height={300} />
       </CardContent>
     </Card>
