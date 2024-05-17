@@ -5,11 +5,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { NoDataFound } from "./no-data-found";
+} from "@/components/ui/card";
+import { NoDataFound } from "@/components/shared/no-data-found";
 import { ScoreLineChart } from "./score-line-chart";
 import { prisma } from "@/lib/db";
 import { format } from "date-fns";
+import { TrendsInfo } from "./player-trends-info";
 interface PlayerCardProps {
   id: string;
 }
@@ -41,9 +42,10 @@ export async function PlayerCard({ id }: PlayerCardProps) {
         <CardTitle>{player.name}</CardTitle>
         <CardDescription>⛨ {player.Team.name}</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col h-96 gap-y-2">
-        <p className="text-sm font-medium leading-none">Score History</p>
-        <ScoreLineChart scores={lineGraphData} />
+      <CardContent className="flex flex-col gap-y-2">
+        {/* <TrendsInfo /> */}
+
+        <ScoreLineChart scores={lineGraphData} height={300} />
       </CardContent>
     </Card>
   );
