@@ -52,7 +52,7 @@ export async function updateScores(
     const message = `Updated ${count} scores`;
     return { success: true, data: message };
   } catch (error) {
-    console.log("updateScores", JSON.stringify(error, null, 2));
+    console.warn("updateScores", JSON.stringify(error, null, 2));
     return { success: false, error: "Something went wrong updating scores." };
   }
 }

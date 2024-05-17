@@ -61,11 +61,10 @@ export default async function getStreaksByPlayerId(playerId: string) {
     `;
 
     const data = Number(result[0].streak_count);
-    console.log(data, typeof data);
 
     return { success: true, data };
   } catch (error) {
-    console.log("getStreaksByPlayerId", JSON.stringify(error, null, 2));
+    console.warn("getStreaksByPlayerId", JSON.stringify(error, null, 2));
     return { success: false, error: "Something went wrong fetching streaks." };
   }
 }

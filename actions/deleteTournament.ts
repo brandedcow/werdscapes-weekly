@@ -17,7 +17,7 @@ export async function deleteTournament(id: string) {
     )}`;
     return { success: true, data: message };
   } catch (error) {
-    console.log("deleteTournament", JSON.stringify(error, null, 2));
+    console.warn("deleteTournament", JSON.stringify(error, null, 2));
     return {
       success: false,
       error: "Something went wrong deleting the tournament.",

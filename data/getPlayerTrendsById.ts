@@ -44,7 +44,7 @@ export default async function getPlayerTrendsById(playerId: string) {
 
     return { success: true, data: playerTrends };
   } catch (error) {
-    console.log("getPlayerTrendsById", JSON.stringify(error, null, 2));
+    console.warn("getPlayerTrendsById", JSON.stringify(error, null, 2));
     return {
       success: false,
       error: "Something went wrong fetching player trends.",
