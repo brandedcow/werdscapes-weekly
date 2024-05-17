@@ -23,7 +23,7 @@ model Score {
   Player     Player @relation(fields: [playerName], references: [name])
 
   tournamentId String
-  Tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  Tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
 
   @@unique([playerName, tournamentId])
 }
@@ -50,7 +50,7 @@ model Tournament {
   type TournamentType @default(Team)
 
   teamName String
-  Team   Team   @relation(fields: [teamName], references: [name])
+  Team     Team   @relation(fields: [teamName], references: [name])
 
   week DateTime
 
