@@ -56,7 +56,7 @@ export async function ScoreList({ tournamentId }: ScoreListProps) {
         <TableBody>
           {scores.map(({ playerName, score, Player: { id } }, index) => (
             <Link key={v4()} href={`/dashboard/player/${id}`} legacyBehavior>
-              <TableRow>
+              <TableRow className="hover:cursor-pointer">
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{playerName}</TableCell>
                 <TableCell>{score}</TableCell>

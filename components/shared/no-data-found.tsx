@@ -7,13 +7,13 @@ import Link from "next/link";
 interface NoDataFoundProps {
   type: string;
   description: string;
-  linkHref: string;
-  buttonLabel: string;
+  linkHref?: string;
+  buttonLabel?: string;
 }
 export function NoDataFound({
   type,
   description,
-  linkHref,
+  linkHref = "/",
   buttonLabel,
 }: NoDataFoundProps) {
   return (
@@ -22,9 +22,12 @@ export function NoDataFound({
       <h2 className="text-lg my-2">No {toCapitalCase(type)} Found</h2>
       <CardContent>
         <CardDescription>{description}</CardDescription>
-        <Button className="mt-6" asChild>
-          <Link href={linkHref}>{buttonLabel}</Link>
-        </Button>
+        {!linkHref ||
+          (buttonLabel && (
+            <Button className="mt-6" asChild>
+              <Link href={linkHref}>{buttonLabel}</Link>
+            </Button>
+          ))}
       </CardContent>
     </div>
   );
