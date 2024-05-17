@@ -6,11 +6,6 @@ export default async function getTournamentById(id: string) {
       where: { id },
       include: {
         Team: true,
-        scores: {
-          orderBy: {
-            score: "desc",
-          },
-        },
       },
     });
 

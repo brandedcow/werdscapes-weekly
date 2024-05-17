@@ -1,5 +1,4 @@
-import { prisma } from "@/lib/db";
-import { Card, CardContent, CardTitle } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import { addDays, format } from "date-fns";
 import { ScoreList } from "./score-list";
 import { CardRightIconHeader } from "../ui/card-right-icon-header";
@@ -28,7 +27,7 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
     );
   }
 
-  const { week, scoreTotal, Team, scores, place } = data;
+  const { week, Team, place } = data;
 
   const tournamentStartDate = new Date(week);
   const tournamentDateRange = `${format(
@@ -50,7 +49,7 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
         )}
       />
       <CardContent>
-        <ScoreList scores={scores} scoreTotal={scoreTotal} />
+        <ScoreList tournamentId={id} />
       </CardContent>
     </Card>
   );
