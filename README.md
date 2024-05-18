@@ -51,6 +51,8 @@
 - - Highest Team Score
 - - Top 5 Percentage
 
+3. Compare Team Members Performance Line Chart
+
 ======================================
 
 # TODO
