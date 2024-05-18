@@ -28,9 +28,9 @@ export function ScoreLineChart({ scores, height }: ScoreLineChartProps) {
           data={scores}
           margin={{
             bottom: 0,
-            right: 15,
+            right: 25,
             left: 0,
-            top: 20,
+            top: 25,
           }}
         >
           <XAxis dataKey="week" />

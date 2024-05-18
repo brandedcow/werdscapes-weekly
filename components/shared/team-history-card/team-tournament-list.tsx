@@ -6,20 +6,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Team, Tournament } from "@prisma/client";
+import { Tournament } from "@prisma/client";
 import { format } from "date-fns";
 import Link from "next/link";
 import { v4 } from "uuid";
 import { NoDataFound } from "../no-data-found";
 
-type TournamentWithTeam = Tournament & {
-  Team: Team;
-};
-
 export function TeamTournamentList({
   tournaments,
 }: {
-  tournaments: TournamentWithTeam[];
+  tournaments: Tournament[];
 }) {
   if (tournaments.length === 0) {
     return (
@@ -44,7 +40,7 @@ export function TeamTournamentList({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {tournaments.map(({ id, week, Team, scoreTotal, place }) => (
+        {tournaments.map(({ id, week, teamName, scoreTotal, place }) => (
           <Link
             key={v4()}
             legacyBehavior
@@ -52,7 +48,7 @@ export function TeamTournamentList({
           >
             <TableRow className="hover:cursor-pointer">
               <TableCell>{format(new Date(week), "MMM d, y")}</TableCell>
-              <TableCell>{Team.name}</TableCell>
+              <TableCell>{teamName}</TableCell>
               <TableCell>{scoreTotal}</TableCell>
               <TableCell>#{place}</TableCell>
             </TableRow>

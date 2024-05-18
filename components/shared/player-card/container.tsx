@@ -11,6 +11,7 @@ import { ScoreLineChart } from "./score-line-chart";
 import { prisma } from "@/lib/db";
 import { format } from "date-fns";
 import { TrendsInfo } from "./player-trends-info";
+import { PlayerTournamentScoresList } from "./player-tournament-scores-list";
 interface PlayerCardProps {
   id: string;
 }
@@ -32,7 +33,7 @@ export async function PlayerCard({ id }: PlayerCardProps) {
   }
 
   const lineGraphData = scores.map((score) => ({
-    week: format(score.Tournament.week, "MMM d"),
+    week: format(score.Tournament.week, "M/d"),
     score: score.score,
   }));
 
@@ -45,6 +46,7 @@ export async function PlayerCard({ id }: PlayerCardProps) {
       <CardContent className="flex flex-col gap-y-4">
         <TrendsInfo playerId={id} />
         <ScoreLineChart scores={lineGraphData} height={300} />
+        <PlayerTournamentScoresList scores={scores.reverse()} />
       </CardContent>
     </Card>
   );
