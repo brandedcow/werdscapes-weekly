@@ -15,7 +15,7 @@ export default async function getScoresByTournamentId(tournamentId: string) {
     const data = { scores, scoreTotal };
     return { success: true, data };
   } catch (error) {
-    console.log("getScoresByTournamentId", JSON.stringify(error, null, 2));
+    console.warn("getScoresByTournamentId", JSON.stringify(error, null, 2));
     return { success: false, error: "Something went wrong finding scores." };
   }
 }

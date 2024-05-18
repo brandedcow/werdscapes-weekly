@@ -9,7 +9,7 @@ export default async function getPlayerById(id: string) {
 
     return { success: true, data: player };
   } catch (error) {
-    console.log("getPlayerById", JSON.stringify(error, null, 2));
+    console.warn("getPlayerById", JSON.stringify(error, null, 2));
     return {
       success: false,
       error: "Something went wrong fetching player info.",
