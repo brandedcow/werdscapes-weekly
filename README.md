@@ -1,28 +1,42 @@
-# Player History Page.
+# Player Page.
 
-## Trends & Records
+## Tags
+
+- Quick display of most impressive achivements
+
+## Trends & Records => (Link to separate page)
 
 1. Trends
 
-- - Week Streak
-- - Average Score (4 Wks)
+- Week Streak
+- Average Score (4 Wks)
 
 2. Records
 
-- - Highest Score
-- - Total Points (All Time)
-- - percentage bracket
+- Highest Score
+- Total Points (All Time)
+- percentage bracket
 
-3. Individual Achievements
+## Score History
 
-- - High Scorer (1k,2k,3k,4k)
-- - Active Participant(10%,25%,50%,100%)
+1. Line Chart
+2. Team Tournament List
+3. Indie Tournament List (TBD)
 
-4. Weekly Team Awards
+## Awards & Accolades => (Link to separate page)
 
-- - Biggest Improvement
-- - Top Scorer
-- - Top 3
+1. Individual Achievements
+
+- High Scorer (1k,2k,3k,4k)
+- Active Participant(10%,25%,50%,100%)
+
+2. Weekly Team Awards
+
+- Biggest Improvement
+- Top Scorer
+- Top 3
+
+======================================
 
 ## Team Tournament Page
 
