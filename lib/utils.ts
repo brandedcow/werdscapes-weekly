@@ -11,9 +11,10 @@ export const bufferToBase64 = (buffer: Buffer) =>
 
 export const toCapitalCase = (
   string: string,
-  options: { from: "camel_case" | "kebab-case" }
+  options?: { from: "camel_case" | "kebab-case" }
 ) => {
-  switch (options.from) {
+  const { from } = options || {};
+  switch (from) {
     case "camel_case": {
       const spaced = string.replace(/([A-Z])/g, " $1");
       return spaced.charAt(0).toUpperCase() + spaced.slice(1);
@@ -27,7 +28,7 @@ export const toCapitalCase = (
       }, "");
     }
     default:
-      return string;
+      return string.charAt(0).toUpperCase() + string.slice(1);
   }
 };
 
