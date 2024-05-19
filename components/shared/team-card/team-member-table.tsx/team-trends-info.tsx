@@ -1,13 +1,14 @@
 import getPlayerTrendsById from "@/data/getPlayerTrendsById";
-import { TrendCard } from "../trend-card";
 import { v4 } from "uuid";
+import { TrendCard } from "../../trend-card";
+import getTeamTrendsById from "@/data/getTeamTrendsById";
 
-interface TrendsInfoProps {
-  playerId: string;
+interface TeamTrendsInfoProps {
+  teamId: string;
 }
 
-export async function TrendsInfo({ playerId }: TrendsInfoProps) {
-  const { success, data } = await getPlayerTrendsById(playerId);
+export async function TeamTrendsInfo({ teamId }: TeamTrendsInfoProps) {
+  const { success, data } = await getTeamTrendsById(teamId);
 
   if (!success || !data) {
     return null;

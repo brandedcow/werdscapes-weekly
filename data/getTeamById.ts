@@ -7,12 +7,12 @@ export default async function getTeamById(id: string) {
     const team = await prisma.team.findFirst({
       where: { id },
       include: {
-        players: true,
+        players: {},
         tournaments: true,
       },
     });
 
-    return { success: true, data: null };
+    return { success: true, data: team };
   } catch (error) {
     console.warn("getTeamById", JSON.stringify(error, null, 2));
     return {

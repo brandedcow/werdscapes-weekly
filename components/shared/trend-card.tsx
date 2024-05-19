@@ -7,7 +7,7 @@ import {
 
 type TrendCardProps = React.HTMLAttributes<HTMLDivElement> & {
   name: string;
-  value: number;
+  value: number | string;
 };
 
 export function TrendCard({ name, value, ...restOfProps }: TrendCardProps) {
@@ -15,7 +15,9 @@ export function TrendCard({ name, value, ...restOfProps }: TrendCardProps) {
     <Card {...restOfProps}>
       <CardHeader className="flex flex-col justify-between">
         <CardDescription>{name}</CardDescription>
-        <CardTitle>{Math.round(value * 100) / 100}</CardTitle>
+        <CardTitle>
+          {typeof value === "string" ? value : Math.round(value * 100) / 100}
+        </CardTitle>
       </CardHeader>
     </Card>
   );

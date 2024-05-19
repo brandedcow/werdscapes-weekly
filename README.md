@@ -22,6 +22,7 @@
 1. Line Chart
 2. Team Tournament List
 3. Indie Tournament List (TBD)
+4. range bar chart by month (TBD)
 
 ## Awards & Accolades => (Link to separate page)
 
@@ -38,7 +39,9 @@
 
 ======================================
 
-## Team Tournament Page
+# Team Tournament Page
+
+## Trends & Records
 
 1. Trends
 
@@ -50,6 +53,27 @@
 
 - - Highest Team Score
 - - Top 5 Percentage
+
+======================================
+
+# Team Page
+
+## Quick Stats
+
+- Average Total Per week
+- Average Score Per Player
+- Total Points All Time
+
+## Latest Tournaments (=> Link to Page)
+
+## Team Members
+
+1. Member Table
+
+- name
+- avg score
+- personal record
+- % contribution (total points / team total points)
 
 3. Compare Team Members Performance Line Chart
 
