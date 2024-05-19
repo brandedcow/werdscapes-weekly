@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, SortingFn } from "@tanstack/react-table";
 
 export type TeamMember = {
   id: string;
@@ -16,13 +16,22 @@ export const columns: ColumnDef<TeamMember>[] = [
   {
     accessorKey: "averageScore",
     header: "Avg Score (4 Wks)",
+    meta: {
+      align: "right",
+    },
   },
   {
     accessorKey: "personalRecord",
     header: "Personal Record",
+    meta: {
+      align: "right",
+    },
   },
   {
     accessorKey: "totalScore",
-    header: "Total Score",
+    header: "Points All Time",
+    meta: {
+      align: "right",
+    },
   },
 ];

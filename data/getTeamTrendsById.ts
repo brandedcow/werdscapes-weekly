@@ -13,6 +13,7 @@ export default async function getTeamTrendsById(id: string) {
     const averageTotalScoreData = await prisma.tournament.aggregate({
       _avg: { scoreTotal: true },
       where: {
+        teamName: team.name,
         week: {
           gte: subMonths(startOfDay(new Date()), 1).toISOString(),
         },

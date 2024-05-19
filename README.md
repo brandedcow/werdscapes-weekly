@@ -77,6 +77,8 @@
 
 3. Compare Team Members Performance Line Chart
 
+Inactive Player Flag? (Know who to remove)
+
 ======================================
 
 # TODO
@@ -88,6 +90,7 @@
 - Login features
 - - Team Page (Prevent others from joining)
 - - - Players on Line Chart with filter
+- - Weekly Score Goal / Ring to Fill
 
 - Better Scanning
 - - Support different aspect ratios

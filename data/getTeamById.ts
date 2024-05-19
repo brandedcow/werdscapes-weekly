@@ -7,7 +7,6 @@ export default async function getTeamById(id: string) {
     const team = await prisma.team.findFirst({
       where: { id },
       include: {
-        players: {},
         tournaments: true,
       },
     });

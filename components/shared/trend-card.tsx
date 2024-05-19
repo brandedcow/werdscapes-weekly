@@ -7,10 +7,12 @@ import {
 
 type TrendCardProps = React.HTMLAttributes<HTMLDivElement> & {
   name: string;
-  value: number | string;
+  value: number | string | null;
 };
 
 export function TrendCard({ name, value, ...restOfProps }: TrendCardProps) {
+  if (!value) return null;
+
   return (
     <Card {...restOfProps}>
       <CardHeader className="flex flex-col justify-between">
