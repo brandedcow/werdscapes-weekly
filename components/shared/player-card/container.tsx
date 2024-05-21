@@ -4,6 +4,9 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
+  CardSection,
+  CardSectionContent,
+  CardSectionTitle,
   CardTitle,
 } from "@/components/ui/card";
 import { NoDataFound } from "@/components/shared/no-data-found";
@@ -49,9 +52,17 @@ export async function PlayerCard({ id }: PlayerCardProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-4">
-        <TrendsInfo playerId={id} />
-        <ScoreLineChart scores={lineGraphData} height={300} />
-        <PlayerTournamentScoresList scores={scores.reverse()} />
+        <CardSection>
+          <CardSectionTitle>Trends</CardSectionTitle>
+          <TrendsInfo playerId={id} />
+        </CardSection>
+        <CardSection>
+          <CardSectionTitle>Score History</CardSectionTitle>
+          <CardSectionContent>
+            <ScoreLineChart scores={lineGraphData} height={300} />
+            <PlayerTournamentScoresList scores={scores.reverse()} />
+          </CardSectionContent>
+        </CardSection>
       </CardContent>
     </Card>
   );

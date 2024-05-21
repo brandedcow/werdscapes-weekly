@@ -22,7 +22,6 @@ interface ScoreLineChartProps {
 export function ScoreLineChart({ scores, height }: ScoreLineChartProps) {
   return (
     <div>
-      <p className="text-sm font-medium leading-none">Score History</p>
       <ResponsiveContainer width="100%" height={height ?? "100%"}>
         <LineChart
           data={scores}

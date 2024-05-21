@@ -80,7 +80,7 @@ const CardSection = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn(className)} {...props} />
+  <div ref={ref} className={cn("mb-4", className)} {...props} />
 ));
 CardSection.displayName = "CardSection";
 
@@ -90,7 +90,7 @@ const CardSectionTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("text-sm font-medium mt-4 mb-2", className)}
+    className={cn("text-sm font-medium mt-2 mb-2", className)}
     {...props}
   />
 ));
@@ -100,7 +100,11 @@ const CardSectionContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn(className)} {...props} />
+  <div
+    ref={ref}
+    className={cn("flex flex-col gap-y-2", className)}
+    {...props}
+  />
 ));
 CardSectionContent.displayName = "CardSectionContent";
 
