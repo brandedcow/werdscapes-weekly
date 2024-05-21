@@ -17,11 +17,10 @@ type StatCardProps = React.HTMLAttributes<HTMLDivElement> & {
 
 export function StatCard({ stat, className, ...props }: StatCardProps) {
   const { displayName, timeframes, type } = stat;
+  const [currIdx, setCurrIdx] = useState<number>(0);
+  const [timeframeData] = useState(Object.entries(timeframes ?? {}));
 
   if (!timeframes) return null;
-
-  const [currIdx, setCurrIdx] = useState<number>(0);
-  const [timeframeData] = useState(Object.entries(timeframes));
 
   if (timeframeData.length === 0) return null;
 
