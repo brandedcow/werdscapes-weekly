@@ -14,17 +14,15 @@ export async function TrendsInfo({ playerId }: TrendsInfoProps) {
   }
 
   return (
-    <div className="flex flex-col gap-y-3">
-      <div className="flex flex-wrap gap-3">
-        {Object.values(data).map(({ displayName, value }) => (
-          <TrendCard
-            key={v4()}
-            name={displayName}
-            value={value}
-            className="flex flex-1"
-          />
-        ))}
-      </div>
+    <div className="flex flex-wrap gap-x-3">
+      {Object.values(data).map(({ displayName, value }) => (
+        <TrendCard
+          key={v4()}
+          name={displayName}
+          value={value}
+          className="flex flex-1"
+        />
+      ))}
     </div>
   );
 }

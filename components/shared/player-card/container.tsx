@@ -14,8 +14,9 @@ import { ScoreLineChart } from "./score-line-chart";
 import { prisma } from "@/lib/db";
 import { format } from "date-fns";
 import { TrendsInfo } from "./player-trends-info";
-import { PlayerTournamentScoresList } from "./player-tournament-scores-list";
 import Link from "next/link";
+import { DataTable } from "@/components/ui/data-table/table";
+import { columns } from "./tournament-scores-columns";
 interface PlayerCardProps {
   id: string;
 }
@@ -41,6 +42,14 @@ export async function PlayerCard({ id }: PlayerCardProps) {
     score: score.score,
   }));
 
+  const transformedData = scores.map((score) => ({
+    ...score,
+    week: format(score.Tournament.week, "MMM d, y"),
+    place: score.Tournament.place,
+    teamName: score.Tournament.teamName,
+    href: `/dashboard/tournament/${score.tournamentId}`,
+  }));
+
   return (
     <Card>
       <CardHeader>
@@ -60,7 +69,7 @@ export async function PlayerCard({ id }: PlayerCardProps) {
           <CardSectionTitle>Score History</CardSectionTitle>
           <CardSectionContent>
             <ScoreLineChart scores={lineGraphData} height={300} />
-            <PlayerTournamentScoresList scores={scores.reverse()} />
+            <DataTable data={transformedData} columns={columns} />
           </CardSectionContent>
         </CardSection>
       </CardContent>

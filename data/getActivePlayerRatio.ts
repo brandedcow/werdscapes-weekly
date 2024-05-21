@@ -31,7 +31,7 @@ export default async function getActivePlayerRatio(teamName: string) {
     `;
     return { success: true, data: result };
   } catch (error) {
-    console.log("getActivePlayerRatio", JSON.stringify(error));
+    console.warn("getActivePlayerRatio", JSON.stringify(error));
     return {
       success: false,
       error: "Something went wrong fetching active player ratios.",

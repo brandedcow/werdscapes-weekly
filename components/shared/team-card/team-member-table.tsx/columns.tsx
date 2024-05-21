@@ -6,7 +6,7 @@ export type TeamMember = {
   averageScore: number;
   personalRecord: number;
   totalScore: number;
-  href: string;
+  href?: string;
 };
 
 const columnHelper = createColumnHelper<TeamMember>();

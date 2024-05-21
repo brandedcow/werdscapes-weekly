@@ -36,8 +36,6 @@ export function DataTable<T>({ columns, data, onRowClick }: DataTableProps<T>) {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  console.log(table.getRowModel());
-
   return (
     <Table>
       <TableHeader>
@@ -74,8 +72,8 @@ export function DataTable<T>({ columns, data, onRowClick }: DataTableProps<T>) {
       </TableHeader>
       <TableBody>
         {table.getRowModel().rows.map((row) => (
-          <Link href={(row.original as any)?.href} legacyBehavior>
-            <TableRow key={row.id} className="hover:cursor-pointer">
+          <Link key={row.id} href={(row.original as any)?.href} legacyBehavior>
+            <TableRow className="hover:cursor-pointer">
               {row.getAllCells().map((cell) => (
                 <TableCell
                   key={cell.id}

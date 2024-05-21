@@ -65,7 +65,7 @@ export default async function getTeamTrendsById(id: string) {
 
     return { success: true, data: teamTrends };
   } catch (error) {
-    console.log("getTeamTrendsById", JSON.stringify(error, null, 2));
+    console.warn("getTeamTrendsById", JSON.stringify(error, null, 2));
     return {
       success: false,
       error: "Something went wrong fetching team trends.",
