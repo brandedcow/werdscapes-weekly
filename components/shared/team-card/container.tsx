@@ -47,11 +47,13 @@ export const TeamCard = async ({ id }: TeamCardProps) => {
       <CardContent>
         <TeamTrendsInfo teamId={id} />
         <>
-          <CardLabel label="Team Members" className="mb-4" />
+          <CardLabel label="Tournament History" className="my-4" />
+          <TeamTournamentList tournaments={data.tournaments} />
+        </>
+        <>
+          <CardLabel label="Team Members" className="my-4" />
           <TeamMemberTable columns={columns} data={transformedData} />
         </>
-        <CardLabel label="Tournament History" />
-        <TeamTournamentList tournaments={data.tournaments} />
       </CardContent>
     </Card>
   );

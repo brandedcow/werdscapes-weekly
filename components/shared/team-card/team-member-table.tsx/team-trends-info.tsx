@@ -16,7 +16,7 @@ export async function TeamTrendsInfo({ teamId }: TeamTrendsInfoProps) {
 
   return (
     <div className="flex flex-col gap-y-3">
-      <p className="text-sm font-medium leading-none">Trends</p>
+      <p className="text-sm font-medium leading-none">Quick Glance</p>
       <div className="flex flex-wrap gap-3">
         {Object.values(data).map(({ displayName, value }) => (
           <TrendCard

@@ -47,11 +47,11 @@ export default async function getTeamTrendsById(id: string) {
     const teamTrends = {
       averageTotalScore: {
         value: Number(averageTotalScoreData._avg.scoreTotal),
-        displayName: "Avg Total (4Wks)",
+        displayName: "Avg Total Stars (Last 4Wks)",
       },
       activePlayerRatio: {
         value: `${averageMonthlyActiveRatio}%`,
-        displayName: "Roster Active% (4Wks)",
+        displayName: "Roster Active% (Last 4Wks)",
       },
       topFivePercentage: {
         value: `${(topFives / tournaments._count) * 100}%`,
@@ -59,7 +59,7 @@ export default async function getTeamTrendsById(id: string) {
       },
       totalAllTime: {
         value: tournaments._sum.scoreTotal,
-        displayName: "Total Points (All Time)",
+        displayName: "Total Stars (All Time)",
       },
     };
 
