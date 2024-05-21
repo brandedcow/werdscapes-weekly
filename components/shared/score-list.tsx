@@ -9,7 +9,7 @@ import {
 import { v4 } from "uuid";
 import Link from "next/link";
 import { NoDataFound } from "./no-data-found";
-import getScoresByTournamentId from "@/data/getScoresByTournamentId";
+import getScoresByTournamentId from "@/data/by-tournament-id/getScoresByTournamentId";
 
 interface ScoreListProps {
   tournamentId: string;
