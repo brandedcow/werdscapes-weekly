@@ -15,27 +15,7 @@ interface StatCardsProps {
   stats: StatData[];
 }
 
-// const sampleStats: StatData[] = [
-//   {
-//     displayName: "Avg Total Stars",
-//     timeframes: {
-//       lastMonth: 3000,
-//       allTime: 2000,
-//     },
-//     type: "number",
-//   },
-//   {
-//     displayName: "Participation%",
-//     timeframes: {
-//       lastMonth: 51,
-//       allTime: 2000,
-//     },
-//     type: "percent",
-//   },
-// ];
-
 export function StatCards({ stats }: StatCardsProps) {
-  console.log(stats);
   return (
     <div className="flex gap-3 flex-wrap">
       {stats.map((stat) => (

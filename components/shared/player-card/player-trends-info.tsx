@@ -1,28 +1,18 @@
-import getPlayerTrendsById from "@/data/getPlayerTrendsById";
+import getPlayerTrendsById from "@/data/by-player-id/getPlayerTrendsById";
 import { TrendCard } from "../trend-card";
 import { v4 } from "uuid";
+import { StatCards } from "../stat-cards/container";
 
 interface TrendsInfoProps {
   playerId: string;
 }
 
-export async function TrendsInfo({ playerId }: TrendsInfoProps) {
+export async function PlayerTrendsInfo({ playerId }: TrendsInfoProps) {
   const { success, data } = await getPlayerTrendsById(playerId);
 
   if (!success || !data) {
     return null;
   }
 
-  return (
-    <div className="flex flex-wrap gap-x-3">
-      {Object.values(data).map(({ displayName, value }) => (
-        <TrendCard
-          key={v4()}
-          name={displayName}
-          value={value}
-          className="flex flex-1"
-        />
-      ))}
-    </div>
-  );
+  return <StatCards stats={data} />;
 }

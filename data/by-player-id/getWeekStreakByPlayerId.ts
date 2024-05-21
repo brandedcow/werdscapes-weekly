@@ -2,16 +2,13 @@
 
 import { prisma } from "@/lib/db";
 
-type StreakTableRow = {
-  playerName: string;
-  week: Date;
-  player_id: string;
+type WeekStreakResult = {
   streak_count: number;
 };
 
-export default async function getStreaksByPlayerId(playerId: string) {
+export default async function getWeekStreakByPlayerId(id: string) {
   try {
-    const result: StreakTableRow[] = await prisma.$queryRaw`
+    const results: WeekStreakResult[] = await prisma.$queryRaw`
       with
         player_week_activity as (
           select
@@ -58,16 +55,18 @@ export default async function getStreaksByPlayerId(playerId: string) {
       from 
         streak_identified
       where
-        player_id = ${playerId}
+        player_id = ${id}
       order by week desc
       limit 1
     `;
 
-    const data = Number(result[0].streak_count);
+    const parsed = {
+      current: results.length !== 1 ? 0 : results[0].streak_count,
+    };
 
-    return { success: true, data };
+    return { success: true, data: parsed };
   } catch (error) {
-    console.warn("getStreaksByPlayerId", JSON.stringify(error, null, 2));
-    return { success: false, error: "Something went wrong fetching streaks." };
+    console.warn("getHighScoreByPlayerId", JSON.stringify(error, null, 2));
+    return { success: false, error: "" };
   }
 }

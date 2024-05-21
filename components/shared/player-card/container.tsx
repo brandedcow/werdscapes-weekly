@@ -1,4 +1,4 @@
-import getPlayerById from "@/data/getPlayerById";
+import getPlayerById from "@/data/by-player-id/getPlayerById";
 import {
   Card,
   CardContent,
@@ -13,7 +13,7 @@ import { NoDataFound } from "@/components/shared/no-data-found";
 import { ScoreLineChart } from "./score-line-chart";
 import { prisma } from "@/lib/db";
 import { format } from "date-fns";
-import { TrendsInfo } from "./player-trends-info";
+import { PlayerTrendsInfo } from "./player-trends-info";
 import Link from "next/link";
 import { DataTable } from "@/components/ui/data-table/table";
 import { columns } from "./tournament-scores-columns";
@@ -63,7 +63,7 @@ export async function PlayerCard({ id }: PlayerCardProps) {
       <CardContent className="flex flex-col gap-y-4">
         <CardSection>
           <CardSectionTitle>Trends</CardSectionTitle>
-          <TrendsInfo playerId={id} />
+          <PlayerTrendsInfo playerId={id} />
         </CardSection>
         <CardSection>
           <CardSectionTitle>Score History</CardSectionTitle>

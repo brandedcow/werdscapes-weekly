@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import { TrendCard } from "../trend-card";
-import getTeamTrendsById from "@/data/getTeamTrendsById";
+import getTeamTrendsById from "@/data/by-team-id/getTeamTrendsById";
 import { StatCards } from "../stat-cards/container";
 
 interface TeamTrendsInfoProps {

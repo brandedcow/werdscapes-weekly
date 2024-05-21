@@ -43,8 +43,6 @@ export default async function getWinPercentByTeamId(teamId: string) {
         FROM  all_tournaments;
     `;
 
-    console.log(results);
-
     const parsed = {
       lastMonth:
         results.length !== 1 ? 0 : Number(results[0].last_month_win_rate),
