@@ -3,7 +3,7 @@ import {
   EditTournamentForm,
   editTournamentFormValues,
 } from "./edit-tournament-form";
-import getTournamentById from "@/data/getTournamentById";
+import getTournamentById from "@/data/by-tournament-id/getTournamentById";
 import { CardRightIconHeader } from "@/components/ui/card-right-icon-header";
 import { DeleteTournamentButton } from "../delete-tournament-button";
 import { EditScoresForm } from "./edit-scores-form";

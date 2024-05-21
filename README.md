@@ -12,17 +12,22 @@
 - Place
   => Rows Link to Team Tournament Page
 
+## ? Indie Tournament History
+
+## ? Login Option
+
 ======================================
 
 # Team Tournament Page
 
 => Links to Edit Tournament Page
 
-1. Quick Stats
+1. Quick Stats 🛠️
 
 - Total Score
-- Player Active%
-- Average Score
+- Participation %
+- Score / Players
+- Player Count
 
 2. Score Table
 
@@ -116,6 +121,8 @@
 - Better Scanning
 - - Support different aspect ratios
 - - Separators between inputs to aid in data input
+
+- Add Upload Brillance / Personal Stats
 
 ======================================
 

@@ -5,7 +5,7 @@ import { CardRightIconHeader } from "../ui/card-right-icon-header";
 import { Button } from "../ui/button";
 import { Edit } from "lucide-react";
 import Link from "next/link";
-import getTournamentById from "@/data/getTournamentById";
+import getTournamentById from "@/data/by-tournament-id/getTournamentById";
 import { NoDataFound } from "./no-data-found";
 
 interface TournamentCardProps {
