@@ -1,4 +1,4 @@
-import { ColumnDef, SortingFn } from "@tanstack/react-table";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 
 export type TeamMember = {
   id: string;
@@ -8,30 +8,22 @@ export type TeamMember = {
   totalScore: number;
 };
 
+const columnHelper = createColumnHelper<TeamMember>();
 export const columns: ColumnDef<TeamMember>[] = [
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "averageScore",
-    header: "Avg Score (4 Wks)",
-    meta: {
-      align: "right",
-    },
-  },
-  {
-    accessorKey: "personalRecord",
-    header: "Personal Record",
-    meta: {
-      align: "right",
-    },
-  },
-  {
-    accessorKey: "totalScore",
-    header: "Points All Time",
-    meta: {
-      align: "right",
-    },
-  },
-];
+  columnHelper.accessor("name", {
+    sortingFn: "alphanumeric",
+    header: "Player Name",
+  }),
+  columnHelper.accessor("averageScore", {
+    header: "Avg Score (4Wks)",
+    meta: { align: "right" },
+  }),
+  columnHelper.accessor("personalRecord", {
+    header: "High Score",
+    meta: { align: "right" },
+  }),
+  columnHelper.accessor("totalScore", {
+    header: "Total (All Time)",
+    meta: { align: "right" },
+  }),
+] as Array<ColumnDef<TeamMember, unknown>>;

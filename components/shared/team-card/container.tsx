@@ -1,11 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import getTeamById from "@/data/getTeamById";
 import { TeamTournamentList } from "../team-history-card/team-tournament-list";
-import { TeamMemberTable } from "./team-member-table.tsx/table";
+import { DataTable as TeamMemberTable } from "../../ui/data-table/table";
 import { CardLabel } from "@/components/ui/card-label";
 import { TeamTrendsInfo } from "./team-member-table.tsx/team-trends-info";
 import { prisma } from "@/lib/db";
-import { TeamMember } from "./team-member-table.tsx/columns";
+import { columns, TeamMember } from "./team-member-table.tsx/columns";
 
 interface TeamCardProps {
   id: string;
@@ -28,16 +28,16 @@ export const TeamCard = async ({ id }: TeamCardProps) => {
     ORDER BY "totalScore" desc;
   `;
 
-  const transformedData = results.map((member) => ({
-    ...member,
-    averageScore: Number(member.averageScore),
-    personalRecord: Number(member.personalRecord),
-    totalScore: Number(member.totalScore),
-  }));
-
   if (!success || !data) {
     return null;
   }
+
+  const transformedData: TeamMember[] = results.map((row) => ({
+    ...row,
+    averageScore: Number(row.averageScore),
+    personalRecord: Number(row.personalRecord),
+    totalScore: Number(row.totalScore),
+  }));
 
   return (
     <Card>
@@ -48,7 +48,7 @@ export const TeamCard = async ({ id }: TeamCardProps) => {
         <TeamTrendsInfo teamId={id} />
         <>
           <CardLabel label="Team Members" className="mb-4" />
-          <TeamMemberTable data={transformedData} />
+          <TeamMemberTable columns={columns} data={transformedData} />
         </>
         <CardLabel label="Tournament History" />
         <TeamTournamentList tournaments={data.tournaments} />
