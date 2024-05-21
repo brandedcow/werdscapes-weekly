@@ -18,13 +18,15 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { TableHeadSortArrow } from "./table-head-sort-arrow";
+import Link from "next/link";
 
 interface DataTableProps<T> {
   columns: ColumnDef<T>[];
   data: T[];
+  onRowClick?: React.MouseEventHandler<HTMLTableRowElement>;
 }
 
-export function DataTable<T>({ columns, data }: DataTableProps<T>) {
+export function DataTable<T>({ columns, data, onRowClick }: DataTableProps<T>) {
   const [stableData] = useState(data);
 
   const table = useReactTable({
@@ -33,6 +35,8 @@ export function DataTable<T>({ columns, data }: DataTableProps<T>) {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+
+  console.log(table.getRowModel());
 
   return (
     <Table>
@@ -70,16 +74,18 @@ export function DataTable<T>({ columns, data }: DataTableProps<T>) {
       </TableHeader>
       <TableBody>
         {table.getRowModel().rows.map((row) => (
-          <TableRow key={row.id}>
-            {row.getAllCells().map((cell) => (
-              <TableCell
-                key={cell.id}
-                align={(cell.column.columnDef.meta as any)?.align}
-              >
-                {cell.getValue() as string}
-              </TableCell>
-            ))}
-          </TableRow>
+          <Link href={(row.original as any)?.href} legacyBehavior>
+            <TableRow key={row.id} className="hover:cursor-pointer">
+              {row.getAllCells().map((cell) => (
+                <TableCell
+                  key={cell.id}
+                  align={(cell.column.columnDef.meta as any)?.align}
+                >
+                  {cell.getValue() as string}
+                </TableCell>
+              ))}
+            </TableRow>
+          </Link>
         ))}
       </TableBody>
     </Table>
