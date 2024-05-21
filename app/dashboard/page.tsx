@@ -1,11 +1,11 @@
 import { PageBreadcrumb } from "@/components/shared/page-breadcrumb";
-import { TeamHistoryCard } from "@/components/shared/team-history-card/container";
+import { TeamTournamentHistoryCard } from "@/components/shared/team-tournament-history-card/container";
 
 export default function Dashboard() {
   return (
     <>
       <PageBreadcrumb />
-      <TeamHistoryCard />
+      <TeamTournamentHistoryCard />
     </>
   );
 }

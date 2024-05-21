@@ -70,5 +70,5 @@ model Team {
 
   players Player[]
 
-  Tournament Tournament[]
+  tournaments Tournament[]
 }

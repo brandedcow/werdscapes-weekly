@@ -39,6 +39,7 @@ export default async function TournamentCard({ id }: TournamentCardProps) {
     <Card>
       <CardRightIconHeader
         title={`#${place} ${Team.name}`}
+        titleHref={`/dashboard/team/${Team.id}`}
         description={tournamentDateRange}
         renderIcon={() => (
           <Button variant="outline" size="icon">

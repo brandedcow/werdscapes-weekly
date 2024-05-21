@@ -1,27 +1,58 @@
+# Dashboard Page
+
+## Team Tournament History
+
+=> Links to Upload Scores Page
+
+1. Tournament Table
+
+- Date
+- Team Name
+- Score
+- Place
+  => Rows Link to Team Tournament Page
+
+======================================
+
+# Team Tournament Page
+
+=> Links to Edit Tournament Page
+
+1. Quick Stats
+
+- Total Score
+- Player Active%
+- Average Score
+
+2. Score Table
+
+- (#)
+- Player Name
+- Score
+  => Rows Link to Player Page
+
+======================================
+
 # Player Page.
 
-## Tags
+=> Links to Team Page
 
-- Quick display of most impressive achivements
+- ? Tags (For Achievements)
 
 ## Trends & Records => (Link to separate page)
 
-1. Trends
-
-- Week Streak
-- Average Score (4 Wks)
-
-2. Records
-
 - Highest Score
-- Total Points (All Time)
-- percentage bracket
+- Average Score (4 Wks)
+- Week Streak
+- ? Total Points (All Time)
+- ? percentage bracket
 
 ## Score History
 
 1. Line Chart
 2. Team Tournament List
-3. Indie Tournament List (TBD)
+3. ? Indie Tournament List
+4. ? range bar chart by month
 
 ## Awards & Accolades => (Link to separate page)
 
@@ -38,35 +69,53 @@
 
 ======================================
 
-## Team Tournament Page
+# Team Page
 
-1. Trends
+## Quick Stats
 
-- - % Activity
-- - Avg Score / Total Players
-- - Avg Score / Active Player
+- Average Total Per week
+- Roster Active %
+- Top 5 % All Time
+- Total Points All Time
 
-2. Records
+## Latest Tournaments (=> Link to Team Tournament Performance Analytics Page)
 
-- - Highest Team Score
-- - Top 5 Percentage
+- Limit to 4 ... or create pagination table 🛠️
+
+## Team Members (=> Link to Players Comparison / Analytics Page)
+
+1. Team Member Table
+
+- name
+- avg score (4 Wks)
+- personal record
+- total points
 
 ======================================
 
-# TODO
+# Team Tournament Performance Analytics Page 🛠️
+
+======================================
+
+# Players Comparison / Analytics Page 🛠️
+
+======================================
+
+# Ideas
+
+- Trends should be clickable to toggle between different time ranges
+- - time range indicated on card, should be manually selectable
 
 - Table Improvements
-- - Add Sort by Column
 - - Filter Tables Features (Search ish)
 
 - Login features
-- - Team Page (Prevent others from joining)
-- - - Players on Line Chart with filter
+- - easier access to own scores and own team scores
+- - Weekly Score Goal / Ring to Fill
 
 - Better Scanning
 - - Support different aspect ratios
-
-- Player Comparison Page
+- - Separators between inputs to aid in data input
 
 ======================================
 

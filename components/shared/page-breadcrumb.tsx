@@ -17,8 +17,9 @@ const pages = [
   "upload-scores",
   "edit",
   "player",
+  "team",
 ];
-const pagesWithId = ["team-tournament", "edit", "player"];
+const pagesWithId = ["team-tournament", "edit", "player", "team"];
 
 export function PageBreadcrumb() {
   const pathname = usePathname();

@@ -2,10 +2,10 @@
 
 import { prisma } from "@/lib/db";
 
-export default async function getTournaments() {
+export default async function getTournaments(teamId?: string) {
   try {
     const data = await prisma.tournament.findMany({
-      where: {},
+      where: { Team: { id: teamId } },
       orderBy: {
         week: "desc",
       },

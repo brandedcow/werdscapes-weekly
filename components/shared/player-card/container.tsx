@@ -4,6 +4,9 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
+  CardSection,
+  CardSectionContent,
+  CardSectionTitle,
   CardTitle,
 } from "@/components/ui/card";
 import { NoDataFound } from "@/components/shared/no-data-found";
@@ -11,7 +14,9 @@ import { ScoreLineChart } from "./score-line-chart";
 import { prisma } from "@/lib/db";
 import { format } from "date-fns";
 import { TrendsInfo } from "./player-trends-info";
-import { PlayerTournamentScoresList } from "./player-tournament-scores-list";
+import Link from "next/link";
+import { DataTable } from "@/components/ui/data-table/table";
+import { columns } from "./tournament-scores-columns";
 interface PlayerCardProps {
   id: string;
 }
@@ -33,20 +38,40 @@ export async function PlayerCard({ id }: PlayerCardProps) {
   }
 
   const lineGraphData = scores.map((score) => ({
-    week: format(score.Tournament.week, "M/d"),
+    week: format(score.Tournament.week, "MMM d"),
     score: score.score,
+  }));
+
+  const transformedData = scores.map((score) => ({
+    ...score,
+    week: format(score.Tournament.week, "MMM d, y"),
+    place: score.Tournament.place,
+    teamName: score.Tournament.teamName,
+    href: `/dashboard/tournament/${score.tournamentId}`,
   }));
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>{player.name}</CardTitle>
-        <CardDescription>⛨ {player.Team.name}</CardDescription>
+        <CardDescription>
+          <Link href={`/dashboard/team/${player.Team.id}`}>
+            ⛨ {player.Team.name}
+          </Link>
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-4">
-        <TrendsInfo playerId={id} />
-        <ScoreLineChart scores={lineGraphData} height={300} />
-        <PlayerTournamentScoresList scores={scores.reverse()} />
+        <CardSection>
+          <CardSectionTitle>Trends</CardSectionTitle>
+          <TrendsInfo playerId={id} />
+        </CardSection>
+        <CardSection>
+          <CardSectionTitle>Score History</CardSectionTitle>
+          <CardSectionContent>
+            <ScoreLineChart scores={lineGraphData} height={300} />
+            <DataTable data={transformedData} columns={columns} />
+          </CardSectionContent>
+        </CardSection>
       </CardContent>
     </Card>
   );
