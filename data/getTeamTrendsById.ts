@@ -50,7 +50,7 @@ export default async function getTeamTrendsById(id: string) {
         displayName: "Avg Total Stars (Last 4Wks)",
       },
       activePlayerRatio: {
-        value: `${averageMonthlyActiveRatio}%`,
+        value: `${Math.round((averageMonthlyActiveRatio * 100) / 100)}%`,
         displayName: "Roster Active% (Last 4Wks)",
       },
       topFivePercentage: {
