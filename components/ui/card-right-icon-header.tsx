@@ -16,7 +16,7 @@ export function CardRightIconHeader({
 }: CardRightIconHeaderProps) {
   return (
     <CardHeader className="flex flex-row justify-between items-center">
-      <div className="flex flex-col space-y-1.5">
+      <div className="flex flex-col space-y-1.5 pr-4">
         {titleHref ? (
           <Link href={titleHref}>
             <CardTitle>{title}</CardTitle>
