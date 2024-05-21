@@ -10,7 +10,8 @@ export type TeamMember = {
 };
 
 const columnHelper = createColumnHelper<TeamMember>();
-export const columns: ColumnDef<TeamMember>[] = [
+
+export const teamMemberTableColumns: ColumnDef<TeamMember>[] = [
   columnHelper.accessor("name", {
     sortingFn: "alphanumeric",
     header: "Player Name",

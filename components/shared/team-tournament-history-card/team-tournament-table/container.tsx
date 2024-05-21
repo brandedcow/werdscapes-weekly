@@ -1,13 +1,18 @@
 import getTournaments from "@/data/getTournaments";
 import { NoDataFound } from "../../no-data-found";
-import {
-  TeamTournamentRow,
-  teamTournamentTableColumns,
-} from "./team-tournament-columns";
+import { TeamTournamentRow, teamTournamentTableColumns } from "./columns";
 import { format } from "date-fns";
 import { DataTable } from "@/components/ui/data-table/table";
 
-export async function TeamTournamentTable({ teamId }: { teamId?: string }) {
+interface TeamTournamentTableProps {
+  teamId?: string;
+  limit?: number;
+}
+
+export async function TeamTournamentTable({
+  teamId,
+  limit,
+}: TeamTournamentTableProps) {
   const { success, data } = await getTournaments(teamId);
 
   if (!success || !data) {
@@ -22,13 +27,15 @@ API to fetch it for us, to see data, please upload manually."
     );
   }
 
-  const transformedData: TeamTournamentRow[] = data.map((tournament) => ({
-    ...tournament,
-    place: `#${tournament.place}`,
-    score: tournament.scoreTotal,
-    week: format(tournament.week, "MMM d, y"),
-    href: `/dashboard/team-tournament/${tournament.id}`,
-  }));
+  const transformedData: TeamTournamentRow[] = data
+    .map((tournament) => ({
+      ...tournament,
+      place: `#${tournament.place}`,
+      score: tournament.scoreTotal,
+      week: format(tournament.week, "MMM d, y"),
+      href: `/dashboard/team-tournament/${tournament.id}`,
+    }))
+    .slice(0, limit);
 
   return (
     <DataTable data={transformedData} columns={teamTournamentTableColumns} />

@@ -7,11 +7,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import getTeamById from "@/data/getTeamById";
-import { DataTable as TeamMemberTable } from "../../ui/data-table/table";
 import { TeamTrendsInfo } from "./team-member-table/team-trends-info";
-import { prisma } from "@/lib/db";
-import { columns, TeamMember } from "./team-member-table/columns";
 import { TeamTournamentTable } from "../team-tournament-history-card/team-tournament-table/container";
+import { TeamMemberTable } from "./team-member-table/container";
 
 interface TeamCardProps {
   id: string;
@@ -20,31 +18,9 @@ interface TeamCardProps {
 export const TeamCard = async ({ id }: TeamCardProps) => {
   const { success, data } = await getTeamById(id);
 
-  const results: TeamMember[] = await prisma.$queryRaw`
-    SELECT 
-      p.id,
-      p.name AS "name",
-      round(AVG(s.score), 2) AS "averageScore",
-      MAX(s.score) AS "personalRecord",
-      SUM(s.score) AS "totalScore"
-    FROM "Player" p
-    INNER JOIN "Score" s ON p.name = s."playerName"
-    where p."teamId" = ${id}
-    GROUP BY p.id, p.name
-    ORDER BY "totalScore" desc;
-  `;
-
   if (!success || !data) {
     return null;
   }
-
-  const transformedData: TeamMember[] = results.map((row) => ({
-    ...row,
-    averageScore: Number(row.averageScore),
-    personalRecord: Number(row.personalRecord),
-    totalScore: Number(row.totalScore),
-    href: `/dashboard/player/${row.id}`,
-  }));
 
   return (
     <Card>
@@ -57,12 +33,12 @@ export const TeamCard = async ({ id }: TeamCardProps) => {
           <TeamTrendsInfo teamId={id} />
         </CardSection>
         <CardSection>
-          <CardSectionTitle>Tournament History</CardSectionTitle>
-          <TeamTournamentTable teamId={id} />
+          <CardSectionTitle>Latest Tournaments</CardSectionTitle>
+          <TeamTournamentTable teamId={id} limit={4} />
         </CardSection>
         <CardSection>
           <CardSectionTitle>Team Members</CardSectionTitle>
-          <TeamMemberTable columns={columns} data={transformedData} />
+          <TeamMemberTable teamId={id} />
         </CardSection>
       </CardContent>
     </Card>

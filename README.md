@@ -1,28 +1,58 @@
+# Dashboard Page
+
+## Team Tournament History
+
+=> Links to Upload Scores Page
+
+1. Tournament Table
+
+- Date
+- Team Name
+- Score
+- Place
+  => Rows Link to Team Tournament Page
+
+======================================
+
+# Team Tournament Page
+
+=> Links to Edit Tournament Page
+
+1. Quick Stats
+
+- Total Score
+- Player Active%
+- Average Score
+
+2. Score Table
+
+- (#)
+- Player Name
+- Score
+  => Rows Link to Player Page
+
+======================================
+
 # Player Page.
 
-## Tags
+=> Links to Team Page
 
-- Quick display of most impressive achivements
+- ? Tags (For Achievements)
 
 ## Trends & Records => (Link to separate page)
 
-1. Trends
-
-- Week Streak
-- Average Score (4 Wks)
-
-2. Records
-
 - Highest Score
-- Total Points (All Time)
-- percentage bracket
+- Average Score (4 Wks)
+- Week Streak
+- ? Total Points (All Time)
+- ? percentage bracket
 
 ## Score History
 
 1. Line Chart
 2. Team Tournament List
-3. Indie Tournament List (TBD)
-4. range bar chart by month (TBD)
+3. ? Indie Tournament List
+4. ? range bar chart by month
 
 ## Awards & Accolades => (Link to separate page)
 
@@ -39,63 +69,53 @@
 
 ======================================
 
-# Team Tournament Page
-
-## Trends & Records
-
-1. Trends
-
-- - % Activity
-- - Avg Score / Total Players
-- - Avg Score / Active Player
-
-2. Records
-
-- - Highest Team Score
-- - Top 5 Percentage
-
-======================================
-
 # Team Page
 
 ## Quick Stats
 
 - Average Total Per week
-- Average Score Per Player
+- Roster Active %
+- Top 5 % All Time
 - Total Points All Time
 
-## Latest Tournaments (=> Link to Page)
+## Latest Tournaments (=> Link to Team Tournament Performance Analytics Page)
 
-## Team Members
+- Limit to 4 ... or create pagination table 🛠️
 
-1. Member Table
+## Team Members (=> Link to Players Comparison / Analytics Page)
+
+1. Team Member Table
 
 - name
-- avg score
+- avg score (4 Wks)
 - personal record
-- % contribution (total points / team total points)
-
-3. Compare Team Members Performance Line Chart
-
-Inactive Player Flag? (Know who to remove)
+- total points
 
 ======================================
 
-# TODO
+# Team Tournament Performance Analytics Page 🛠️
+
+======================================
+
+# Players Comparison / Analytics Page 🛠️
+
+======================================
+
+# Ideas
+
+- Trends should be clickable to toggle between different time ranges
+- - time range indicated on card, should be manually selectable
 
 - Table Improvements
-- - Add Sort by Column
 - - Filter Tables Features (Search ish)
 
 - Login features
-- - Team Page (Prevent others from joining)
-- - - Players on Line Chart with filter
+- - easier access to own scores and own team scores
 - - Weekly Score Goal / Ring to Fill
 
 - Better Scanning
 - - Support different aspect ratios
-
-- Player Comparison Page
+- - Separators between inputs to aid in data input
 
 ======================================
 
