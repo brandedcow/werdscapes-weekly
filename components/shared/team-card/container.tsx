@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import getTeamById from "@/data/getTeamById";
-import { TeamTrendsInfo } from "./team-member-table/team-trends-info";
+import { TeamTrendsInfo } from "./team-trends-info";
 import { TeamTournamentTable } from "../team-tournament-history-card/team-tournament-table/container";
 import { TeamMemberTable } from "./team-member-table/container";
 

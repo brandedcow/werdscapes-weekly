@@ -1,67 +1,40 @@
 "use server";
 
-import { prisma } from "@/lib/db";
-import { startOfDay, subMonths } from "date-fns";
-import getActivePlayerRatio from "./getActivePlayerRatio";
+import getPointTotalByTeamId from "./getPointTotalByTeamId";
+import { StatData } from "@/components/shared/stat-cards/container";
+import getWinPercentByTeamId from "./getWinPercentByTeamId";
+import getAvgScoreByTeamId from "./getAvgScoreByTeamId";
+import getParticipationByTeamId from "./getParticipationByTeamId";
 
 export default async function getTeamTrendsById(id: string) {
   try {
-    const team = await prisma.team.findFirst({ where: { id } });
+    const { data: avgTotalScore } = await getAvgScoreByTeamId(id);
+    const { data: participation } = await getParticipationByTeamId(id);
+    const { data: topFives } = await getWinPercentByTeamId(id);
+    const { data: totalStars } = await getPointTotalByTeamId(id);
 
-    if (!team) throw new Error("No team found.");
-
-    const averageTotalScoreData = await prisma.tournament.aggregate({
-      _avg: { scoreTotal: true },
-      where: {
-        teamName: team.name,
-        week: {
-          gte: subMonths(startOfDay(new Date()), 1).toISOString(),
-        },
+    const teamTrends: StatData[] = [
+      {
+        displayName: "Avg Total Score",
+        type: "number",
+        timeframes: avgTotalScore,
       },
-    });
-
-    const topFives = await prisma.tournament.count({
-      where: {
-        Team: { id },
-        place: {
-          lte: 5,
-        },
+      {
+        displayName: "Participation%",
+        type: "percent",
+        timeframes: participation,
       },
-    });
-
-    const { data, error } = await getActivePlayerRatio(team.name);
-    if (!data) throw new Error(error);
-    const averageMonthlyActiveRatio =
-      data.reduce((acc, curr) => {
-        return acc + Number(curr.active_percent);
-      }, 0) / data.length;
-
-    const tournaments = await prisma.tournament.aggregate({
-      _sum: {
-        scoreTotal: true,
+      {
+        displayName: "Top 5%",
+        type: "percent",
+        timeframes: topFives,
       },
-      _count: true,
-      where: { Team: { id } },
-    });
-
-    const teamTrends = {
-      averageTotalScore: {
-        value: Number(averageTotalScoreData._avg.scoreTotal),
-        displayName: "Avg Total Stars (Last 4Wks)",
+      {
+        displayName: "Total Stars",
+        type: "number",
+        timeframes: totalStars,
       },
-      activePlayerRatio: {
-        value: `${Math.round((averageMonthlyActiveRatio * 100) / 100)}%`,
-        displayName: "Roster Active% (Last 4Wks)",
-      },
-      topFivePercentage: {
-        value: `${(topFives / tournaments._count) * 100}%`,
-        displayName: "Top 5% (All Time)",
-      },
-      totalAllTime: {
-        value: tournaments._sum.scoreTotal,
-        displayName: "Total Stars (All Time)",
-      },
-    };
+    ];
 
     return { success: true, data: teamTrends };
   } catch (error) {
