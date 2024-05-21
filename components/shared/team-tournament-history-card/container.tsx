@@ -2,14 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PlusSquare } from "lucide-react";
 import Link from "next/link";
-import { TeamTournamentList } from "./team-tournament-list";
-import getTournaments from "@/data/getTournaments";
 import { CardRightIconHeader } from "@/components/ui/card-right-icon-header";
+import { TeamTournamentTable } from "./team-tournament-table/container";
 
-export async function TeamHistoryCard({}) {
-  // TODO: sort tournaments by date, include options in table to sort
-  const { data } = await getTournaments();
-
+export async function TeamTournamentHistoryCard({}) {
   return (
     <Card>
       <CardRightIconHeader
@@ -24,7 +20,7 @@ export async function TeamHistoryCard({}) {
         )}
       />
       <CardContent>
-        <TeamTournamentList tournaments={data ?? []} />
+        <TeamTournamentTable />
       </CardContent>
     </Card>
   );

@@ -3,16 +3,15 @@ import {
   CardContent,
   CardHeader,
   CardSection,
-  CardSectionContent,
   CardSectionTitle,
   CardTitle,
 } from "@/components/ui/card";
 import getTeamById from "@/data/getTeamById";
-import { TeamTournamentList } from "../team-history-card/team-tournament-list";
 import { DataTable as TeamMemberTable } from "../../ui/data-table/table";
-import { TeamTrendsInfo } from "./team-member-table.tsx/team-trends-info";
+import { TeamTrendsInfo } from "./team-member-table/team-trends-info";
 import { prisma } from "@/lib/db";
-import { columns, TeamMember } from "./team-member-table.tsx/columns";
+import { columns, TeamMember } from "./team-member-table/columns";
+import { TeamTournamentTable } from "../team-tournament-history-card/team-tournament-table/container";
 
 interface TeamCardProps {
   id: string;
@@ -59,7 +58,7 @@ export const TeamCard = async ({ id }: TeamCardProps) => {
         </CardSection>
         <CardSection>
           <CardSectionTitle>Tournament History</CardSectionTitle>
-          <TeamTournamentList tournaments={data.tournaments} />
+          <TeamTournamentTable teamId={id} />
         </CardSection>
         <CardSection>
           <CardSectionTitle>Team Members</CardSectionTitle>
