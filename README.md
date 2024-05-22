@@ -1,128 +1,107 @@
-# Dashboard Page
+# Wordscapes Weekly
 
-## Team Tournament History
+Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see results.
 
-=> Links to Upload Scores Page
+1. Track Weekly Tournament Stats
+2. Weekly Insights
+3. Performance Trends
+4. Goal Setting
 
-1. Tournament Table
+\*PeopleFun does not offer any public API to access tournament and player data, so manual uploading of stats is required. Currently uploading screenshots is the best way to get this data.
 
-- Date
-- Team Name
-- Score
-- Place
-  => Rows Link to Team Tournament Page
+# Pages
 
-## ? Indie Tournament History
+### Dashboard
 
-## ? Login Option
+1. Add Team
+2. Upload Scores
+3. View Stats
 
-======================================
+---
 
-# Team Tournament Page
+### Team Tournament
 
-=> Links to Edit Tournament Page
+1. Tournament Table - Week - Team Name - Score - Place
+   -> Row Link to [Team Tournament Detail](#team-tournament-detail)
+2. Searchable
+3. Filterable
 
-1. Quick Stats 🛠️
+---
 
-- Total Score
-- Participation %
-- Score / Players
-- Player Count
+### Team Tournament Detail
 
-2. Score Table
+-> Link to [Team Detail](#team-detail)
+-> Link to [Edit Tournament](#edit-tournament)
 
-- (#)
-- Player Name
-- Score
-  => Rows Link to Player Page
+1. Quick Glance (Stats + Weekly Insights)
+   - Total Score
+   - Participation % / ?Player Count
+   - Average Score
+2. Score Table - (#) - Player Name - Score
+   -> Row Link to [Player Detail](#player-detail)
 
-======================================
+---
 
-# Player Page.
+### Edit Tournament
 
-=> Links to Team Page
+1. Update Tournament Info
+2. Update Player Scores
 
-- ? Tags (For Achievements)
+---
 
-## Trends & Records => (Link to separate page)
+### Team Detail
 
-- Highest Score
-- Average Score (4 Wks)
-- Week Streak
-- ? Total Points (All Time)
-- ? percentage bracket
+1. Quick Glance
+   - Average Score
+   - Participation %
+   - Top 5 %
+   - Total Points
+2. Latest Tournaments -> Link to [Team Tournament Performance Analytics](#team-tournament-performance-analytics)
+   -> Row Link to [Team Tournament Detail](#team-tournament-detail)
+3. Team Member Table -> Link to [Player Comparison](#player-comparison)
+   - Name
+   - Average Score
+   - Personal Records
+   - Total Points
 
-## Score History
+- ? Ability to mark players as removed
 
-1. Line Chart
-2. Team Tournament List
-3. ? Indie Tournament List
-4. ? range bar chart by month
+---
 
-## Awards & Accolades => (Link to separate page)
+### Player Detail
 
-1. Individual Achievements
+1. Quick Glance
+   - Highest Score
+   - Average Score
+   - Week Streak
+   - Total Points
+2. Score History
+   - Line Chart
+   - Tournament History Table
+     -> Row Link to [Team Tournament Detail](#team-tournament-detail)
 
-- High Scorer (1k,2k,3k,4k)
-- Active Participant(10%,25%,50%,100%)
+---
 
-2. Weekly Team Awards
+### Team Tournament Performance Analytics
 
-- Biggest Improvement
-- Top Scorer
-- Top 3
+---
 
-======================================
+### Player Comparison
 
-# Team Page
-
-## Quick Stats
-
-- Average Total Per week
-- Roster Active %
-- Top 5 % All Time
-- Total Points All Time
-
-## Latest Tournaments (=> Link to Team Tournament Performance Analytics Page)
-
-- Limit to 4 ... or create pagination table 🛠️
-
-## Team Members (=> Link to Players Comparison / Analytics Page)
-
-1. Team Member Table
-
-- name
-- avg score (4 Wks)
-- personal record
-- total points
-
-======================================
-
-# Team Tournament Performance Analytics Page 🛠️
-
-======================================
-
-# Players Comparison / Analytics Page 🛠️
-
-======================================
+---
 
 # Ideas
 
-- Table Improvements
-- - Filter Tables Features (Search ish)
+- Login Feature
 
-- Login features
-- - easier access to own scores and own team scores
-- - Weekly Score Goal / Ring to Fill
+  - Upload Scores
+  - Dashboard (Quick access to Stats)
+  - Weekly Score Goal
 
-- Better Scanning
-- - Support different aspect ratios
-- - Separators between inputs to aid in data input
-
-- Add Upload Brillance / Personal Stats
-
-======================================
+- Improve Score Upload Experience
+  - Different Aspect Ratios
+- Track Brilliance and Helps
 
 # Bugs
 
-- Edit Tournament Button overflow on small screens
+- Edit Tournament Button overflows on small screens
