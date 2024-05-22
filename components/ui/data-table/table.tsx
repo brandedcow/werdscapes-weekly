@@ -29,6 +29,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "../pagination";
+import { v4 } from "uuid";
 
 export type DataTableProps<T> = {
   columns: ColumnDef<T>[];
@@ -134,7 +135,7 @@ export function DataTable<T>({
                 {table.getState().pagination.pageIndex < 3 ? (
                   <>
                     {[0, 1, 2, 3].map((pageIndex) => (
-                      <PaginationItem>
+                      <PaginationItem key={v4()}>
                         <PaginationLink
                           onClick={() => table.setPageIndex(pageIndex)}
                           className={cn(
@@ -161,7 +162,7 @@ export function DataTable<T>({
                       table.getState().pagination.pageIndex - 1,
                       table.getState().pagination.pageIndex,
                     ].map((pageIndex) => (
-                      <PaginationItem>
+                      <PaginationItem key={v4()}>
                         <PaginationLink
                           onClick={() => table.setPageIndex(pageIndex)}
                           className={cn(
@@ -184,7 +185,7 @@ export function DataTable<T>({
                       table.getState().pagination.pageIndex,
                       table.getState().pagination.pageIndex + 1,
                     ].map((pageIndex) => (
-                      <PaginationItem>
+                      <PaginationItem key={v4()}>
                         <PaginationLink
                           onClick={() => table.setPageIndex(pageIndex)}
                           className={cn(
@@ -204,7 +205,7 @@ export function DataTable<T>({
               </>
             ) : (
               new Array(numPages).fill(null).map((_, index) => (
-                <PaginationItem>
+                <PaginationItem key={v4()}>
                   <PaginationLink
                     onClick={() => table.setPageIndex(index)}
                     className={cn(
