@@ -16,7 +16,7 @@ export async function TeamTournamentTable({
 }: TeamTournamentTableProps) {
   const { success, data } = await getTournaments(teamId);
 
-  if (!success || !data) {
+  if (!success || !data || data.length === 0) {
     return (
       <NoDataFound
         type="tournaments"

@@ -17,10 +17,10 @@ export function NoDataFound({
   buttonLabel,
 }: NoDataFoundProps) {
   return (
-    <div className="flex flex-col items-center justify-center px-16 text-center">
+    <div className="flex flex-col items-center justify-center text-center">
       <RandomAnimalIcon />
-      <h2 className="text-lg my-2">No {toCapitalCase(type)} Found</h2>
-      <CardContent>
+      <CardTitle className="my-4">No {toCapitalCase(type)} Found</CardTitle>
+      <CardContent className="w-[27rem]">
         <CardDescription>{description}</CardDescription>
         {!linkHref ||
           (buttonLabel && (
