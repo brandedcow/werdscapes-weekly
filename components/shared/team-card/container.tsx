@@ -34,7 +34,7 @@ export const TeamCard = async ({ id }: TeamCardProps) => {
         </CardSection>
         <CardSection>
           <CardSectionTitle>Latest Tournaments</CardSectionTitle>
-          <TeamTournamentTable teamId={id} limit={4} />
+          <TeamTournamentTable teamId={id} isPaginated pageSize={4} />
         </CardSection>
         <CardSection>
           <CardSectionTitle>Team Members</CardSectionTitle>

@@ -108,9 +108,6 @@
 
 # Ideas
 
-- Trends should be clickable to toggle between different time ranges
-- - time range indicated on card, should be manually selectable
-
 - Table Improvements
 - - Filter Tables Features (Search ish)
 

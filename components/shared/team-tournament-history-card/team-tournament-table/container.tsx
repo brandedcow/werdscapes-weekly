@@ -2,16 +2,17 @@ import getTournaments from "@/data/getTournaments";
 import { NoDataFound } from "../../no-data-found";
 import { TeamTournamentRow, teamTournamentTableColumns } from "./columns";
 import { format } from "date-fns";
-import { DataTable } from "@/components/ui/data-table/table";
+import { DataTable, DataTableProps } from "@/components/ui/data-table/table";
 
-interface TeamTournamentTableProps {
+type TeamTournamentTableProps = {
   teamId?: string;
   limit?: number;
-}
+} & Omit<DataTableProps<TeamTournamentRow>, "data" | "columns">;
 
 export async function TeamTournamentTable({
   teamId,
   limit,
+  ...props
 }: TeamTournamentTableProps) {
   const { success, data } = await getTournaments(teamId);
 
@@ -38,6 +39,10 @@ API to fetch it for us, to see data, please upload manually."
     .slice(0, limit);
 
   return (
-    <DataTable data={transformedData} columns={teamTournamentTableColumns} />
+    <DataTable
+      {...props}
+      data={transformedData}
+      columns={teamTournamentTableColumns}
+    />
   );
 }
