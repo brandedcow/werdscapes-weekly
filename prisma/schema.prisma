@@ -14,43 +14,63 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Score {
+model TournamentScore {
   id String @id @default(cuid())
 
   score Int
 
+  playerId   String
   playerName String
-  Player     Player @relation(fields: [playerName], references: [name])
+  Player     Player @relation(fields: [playerId, playerName], references: [id, name])
 
-  tournamentId String
-  Tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  individualTournamentId String
+  IndividualTournament   IndividualTournament @relation(fields: [individualTournamentId], references: [id], onDelete: Cascade)
 
-  @@unique([playerName, tournamentId])
+  teamTournamentId String
+  TeamTournament   TeamTournament @relation(fields: [teamTournamentId], references: [id], onDelete: Cascade)
+
+  @@unique([playerId, individualTournamentId])
+  @@unique([playerId, teamTournamentId])
+}
+
+model Brilliance {
+  id String @id @default(cuid())
+
+  playerId String
+  Player   Player @relation(fields: [playerId], references: [id])
+
+  score Int
+
+  date DateTime
 }
 
 model Player {
   id String @id @default(cuid())
 
-  name String @unique
+  name String
 
-  teamId String
-  Team   Team   @relation(fields: [teamId], references: [id])
+  teamId   String
+  teamName String
+  Team     Team   @relation(fields: [teamId, teamName], references: [id, name])
 
-  scores Score[]
+  isCurrentTeam Boolean @default(true)
+
+  isLeader Boolean @default(false)
+
+  tournamentScores TournamentScore[]
+
+  individualTournaments IndividualTournament[]
+
+  brilliance Brilliance[]
+
+  @@unique([id, name])
 }
 
-enum TournamentType {
-  Individual
-  Team
-}
-
-model Tournament {
+model IndividualTournament {
   id String @id @default(cuid())
 
-  type TournamentType @default(Team)
-
-  teamName String
-  Team     Team   @relation(fields: [teamName], references: [name])
+  playerId String
+  Player   Player @relation(fields: [playerId], references: [id])
 
   week DateTime
 
@@ -58,17 +78,36 @@ model Tournament {
 
   place Int @default(0)
 
-  scores Score[]
+  scores TournamentScore[]
 
-  @@unique([teamName, week, type])
+  @@unique([playerId, week])
+}
+
+model TeamTournament {
+  id String @id @default(cuid())
+
+  teamId String
+  Team   Team   @relation(fields: [teamId], references: [id])
+
+  week DateTime
+
+  scoreTotal Int
+
+  place Int @default(0)
+
+  scores TournamentScore[]
+
+  @@unique([teamId, week])
 }
 
 model Team {
   id String @id @default(cuid())
 
-  name String @unique
+  name String
 
   players Player[]
 
-  tournaments Tournament[]
+  teamTournaments TeamTournament[]
+
+  @@unique([id, name])
 }

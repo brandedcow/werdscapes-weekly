@@ -9,29 +9,75 @@ Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see resul
 
 \*PeopleFun does not offer any public API to access tournament and player data, so manual uploading of stats is required. Currently uploading screenshots is the best way to get this data.
 
-# Pages
+## Header
 
-### Dashboard
+-> Link to [Home](#home)
 
-1. Add Team
-2. Upload Scores
-3. View Stats
+1. Create Account -> Link to [Register](#register)
+2. Profile -> Link to [Profile](#profile)
+3. Dark Mode Toggle
+4. ? Nav Bar
+   1. Home / Dashboard
+   2. Team Tournaments
+   3. Individual Tournaments
+   4. Players
+   5. Teams
+
+- Page Breadcrumbs
+
+## Pages
+
+### Register
+
+-> Link to [Login](#login)
+
+### Login
+
+-> link to [Register](#register)
+
+### Home
+
+1. Search Feature (Team, Player)
+2. Team Tournament Table -> Link to [Team Tournament](#team-tournaments)
+   1. Week
+   2. Team Name
+   3. Score
+   4. Place
+      -> Row Link to [Team Tournament Detail](#team-tournament-detail)
+   - No Data (CTA) -> Link to [Register](#register)
+3. Individual Tournament Table -> Link to [Individual Tournament](#individual-tournaments)
+   1. Week
+   2. Player Name
+   3. Score
+   4. Place
+      -> Row Link to [Individual Tournament Detail]()
+   - No Data (CTA) -> Link to [Register](#register)
+
+### Dashboard (WIP)
+
+1. Weekly Goal
+   -
+2. [Player Detail](#player-detail)
+   - Quick Glance
+   - Score History
+   - Individual Tournament
+3. Tournament Table
+   a. Indie Tab
+   b. Team Tab
 
 ---
 
-### Team Tournament
+### Team Tournaments
 
 1. Tournament Table - Week - Team Name - Score - Place
    -> Row Link to [Team Tournament Detail](#team-tournament-detail)
 2. Searchable
 3. Filterable
 
----
-
 ### Team Tournament Detail
 
 -> Link to [Team Detail](#team-detail)
--> Link to [Edit Tournament](#edit-tournament)
+-> Link to [Edit Team Tournament](#edit-team-tournament)
 
 1. Quick Glance (Stats + Weekly Insights)
    - Total Score
@@ -40,12 +86,26 @@ Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see resul
 2. Score Table - (#) - Player Name - Score
    -> Row Link to [Player Detail](#player-detail)
 
----
-
-### Edit Tournament
+### Edit Team Tournament
 
 1. Update Tournament Info
 2. Update Player Scores
+
+---
+
+### Individual Tournaments
+
+1. Tournament Table - Week - Player Name - Score - Place
+   -> Row Link to [Tournament Detail](#individual-tournament-detail)
+2. Searchable
+3. Filterable
+
+### Individual Tournament Detail
+
+-> Link to [Player Detail](#player-detail)
+-> Link to [Edit Individual Tournament](#edit-individual-tournament)
+
+### Edit Individual Tournament
 
 ---
 
@@ -66,6 +126,8 @@ Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see resul
 
 - ? Ability to mark players as removed
 
+### Team Performance Analytics
+
 ---
 
 ### Player Detail
@@ -79,12 +141,6 @@ Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see resul
    - Line Chart
    - Tournament History Table
      -> Row Link to [Team Tournament Detail](#team-tournament-detail)
-
----
-
-### Team Tournament Performance Analytics
-
----
 
 ### Player Comparison
 
