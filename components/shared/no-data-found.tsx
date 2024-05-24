@@ -1,34 +1,23 @@
 import { toCapitalCase } from "@/lib/utils";
-import { CardContent, CardDescription, CardTitle } from "../ui/card";
+import { CardDescription } from "../ui/card";
 import { RandomAnimalIcon } from "./random-animal-icon";
-import { Button } from "../ui/button";
-import Link from "next/link";
 
 interface NoDataFoundProps {
   type: string;
   description: string;
-  linkHref?: string;
-  buttonLabel?: string;
+  buttonComponent: (props?: any) => React.ReactNode;
 }
 export function NoDataFound({
   type,
   description,
-  linkHref = "/",
-  buttonLabel,
+  buttonComponent,
 }: NoDataFoundProps) {
   return (
-    <div className="flex flex-col items-center justify-center text-center">
+    <div className="flex flex-col items-center gap-y-3">
       <RandomAnimalIcon />
-      <CardTitle className="my-4">No {toCapitalCase(type)} Found</CardTitle>
-      <CardContent className="w-[27rem]">
-        <CardDescription>{description}</CardDescription>
-        {!linkHref ||
-          (buttonLabel && (
-            <Button className="mt-6" asChild>
-              <Link href={linkHref}>{buttonLabel}</Link>
-            </Button>
-          ))}
-      </CardContent>
+      <h2 className="font-semibold">No {toCapitalCase(type)} Found</h2>
+      <CardDescription className="text-center">{description}</CardDescription>
+      {buttonComponent && buttonComponent()}
     </div>
   );
 }

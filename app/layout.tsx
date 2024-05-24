@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { PageHeader } from "@/components/shared/page-header";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,11 +32,11 @@ export default function RootLayout({
           >
             <main
               className={cn(
-                "flex flex-col justify-start items-center h-svh w-svw p-6"
+                "flex flex-col justify-start items-center h-svh w-svw p-6 overflow-hidden"
               )}
             >
               <PageHeader />
-              {children}
+              <ScrollArea className="w-full">{children}</ScrollArea>
             </main>
           </ThemeProvider>
           <Toaster />

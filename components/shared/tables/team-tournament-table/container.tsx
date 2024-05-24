@@ -4,6 +4,9 @@ import { TeamTournamentRow, teamTournamentTableColumns } from "./columns";
 import { format } from "date-fns";
 import { DataTable, DataTableProps } from "@/components/ui/data-table/table";
 import { TeamTournament } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 type TeamTournamentTableProps = {
   teamId?: string;
@@ -23,8 +26,20 @@ export async function TeamTournamentTable({
         type="tournaments"
         description="There is no tournament data to be seen here. Since there is no public
 API to fetch it for us, to see data, please upload manually."
-        linkHref="/dashboard/upload-scores"
-        buttonLabel="Upload Scores"
+        buttonComponent={() => (
+          <>
+            <SignedIn>
+              <Button asChild>
+                <Link href="/upload-scores">Upload Scores</Link>
+              </Button>
+            </SignedIn>
+            <SignedOut>
+              <Button asChild>
+                <SignInButton>Create Account to Upload</SignInButton>
+              </Button>
+            </SignedOut>
+          </>
+        )}
       />
     );
   }
