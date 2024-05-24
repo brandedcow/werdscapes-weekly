@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { useUploadFormStore } from "@/data/useUploadFormStore";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,6 +30,7 @@ export type ocrFormValues = z.infer<typeof ocrFormSchema>;
 
 export function OCRForm() {
   const { setData, setPlace } = useUploadFormStore();
+  const { toast } = useToast();
 
   const form = useForm<ocrFormValues>({
     resolver: zodResolver(ocrFormSchema),
@@ -45,6 +47,11 @@ export function OCRForm() {
       const { scoreboard, place } = data;
       if (scoreboard) setData(scoreboard);
       if (place) setPlace(place);
+
+      toast({
+        title: "OCR Success",
+        description: `Scanned ${Object.keys(scoreboard).length} scores.`,
+      });
     }
   };
 
@@ -54,7 +61,7 @@ export function OCRForm() {
         onSubmit={form.handleSubmit(handleSubmit)}
         className="flex flex-col gap-y-2"
       >
-        <div className="flex  items-end">
+        <div className="flex items-end">
           <FormField
             control={form.control}
             name="screenshots"
@@ -63,7 +70,7 @@ export function OCRForm() {
               fieldState,
             }) => (
               <FormItem>
-                <FormLabel>Screenshots</FormLabel>
+                <FormLabel>Select Screenshots</FormLabel>
                 <div className="flex">
                   <FormControl>
                     <Input
@@ -74,26 +81,24 @@ export function OCRForm() {
                       className="rounded-tr-none rounded-br-none"
                     />
                   </FormControl>
-                  <Button
-                    type="submit"
-                    className="flex gap-x-1 items-center rounded-tl-none rounded-bl-none"
-                    disabled={form.formState.isSubmitting}
-                  >
-                    <ImageUp
-                      height={14}
-                      width={14}
-                      className={cn(
-                        form.formState.isSubmitting && "animate-spin"
-                      )}
-                    />
-                    Scan Screenshots
-                  </Button>
                 </div>
                 <FormMessage>{fieldState.error?.message}</FormMessage>
               </FormItem>
             )}
           />
         </div>
+        <Button
+          type="submit"
+          className="flex gap-x-1 items-center"
+          disabled={form.formState.isSubmitting}
+        >
+          <ImageUp
+            height={14}
+            width={14}
+            className={cn(form.formState.isSubmitting && "animate-spin")}
+          />
+          Scan with OCR space
+        </Button>
       </form>
     </Form>
   );

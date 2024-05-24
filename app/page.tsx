@@ -12,6 +12,14 @@ export default function Home() {
           <TeamTournamentTable />
         </CardContent>
       </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Latest Individual Tournaments</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <TeamTournamentTable />
+        </CardContent>
+      </Card>
     </div>
   );
 }
