@@ -3,6 +3,7 @@ import { NoDataFound } from "../../no-data-found";
 import { TeamTournamentRow, teamTournamentTableColumns } from "./columns";
 import { format } from "date-fns";
 import { DataTable, DataTableProps } from "@/components/ui/data-table/table";
+import { TeamTournament } from "@prisma/client";
 
 type TeamTournamentTableProps = {
   teamId?: string;
@@ -29,7 +30,7 @@ API to fetch it for us, to see data, please upload manually."
   }
 
   const transformedData: TeamTournamentRow[] = data
-    .map((tournament) => ({
+    .map((tournament: TeamTournament) => ({
       ...tournament,
       place: `#${tournament.place}`,
       score: tournament.scoreTotal,

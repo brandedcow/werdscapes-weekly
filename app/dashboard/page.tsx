@@ -5,7 +5,7 @@ export default function Dashboard() {
   return (
     <>
       <PageBreadcrumb />
-      <TeamTournamentHistoryCard />
+      {/* <TeamTournamentHistoryCard /> */}
     </>
   );
 }
