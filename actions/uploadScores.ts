@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/db";
 import { TournamentType } from "@prisma/client";
 import { format } from "date-fns";
-import { uploadScoresFormValues } from "@/components/shared/upload-screenshot-card/upload-scores-form";
+import { uploadScoresFormValues } from "@/components/shared/upload-scores-card/upload-scores-form";
 
 export const uploadScores = async (formData: uploadScoresFormValues) => {
   try {

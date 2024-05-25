@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { OCRForm } from "./ocr-form";
+import { OCRForm } from "@/components/shared/forms/ocr-form";
 
 export function ScanScreenshotsCard() {
   return (

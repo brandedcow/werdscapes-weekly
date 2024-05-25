@@ -99,6 +99,7 @@ export default function UploadScoresForm() {
   };
 
   useEffect(() => {
+    if (!data) return;
     for (const [name, score] of Object.entries(data)) {
       append({ name, score });
     }
@@ -234,7 +235,7 @@ export default function UploadScoresForm() {
             </FormItem>
           )}
         />
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <Button
             variant="secondary"
             type="button"
@@ -258,7 +259,7 @@ export default function UploadScoresForm() {
             <ListPlus height={18} width={18} className="mr-1" />
             Clear Scores
           </Button>
-        </div>
+        </div> */}
         <Button
           type="submit"
           className={cn(form.formState.isSubmitting && "animate-spin")}
