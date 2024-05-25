@@ -2,9 +2,9 @@
 
 import { prisma } from "@/lib/db";
 
-export default async function getTournaments(teamId?: string) {
+export default async function getTeamTournaments(teamId?: string) {
   try {
-    const data = await prisma.tournament.findMany({
+    const data = await prisma.teamTournament.findMany({
       where: { Team: { id: teamId } },
       orderBy: {
         week: "desc",

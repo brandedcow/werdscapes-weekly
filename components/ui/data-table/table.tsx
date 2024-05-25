@@ -36,13 +36,14 @@ export type DataTableProps<T> = {
   data: T[];
   isPaginated?: boolean;
   pageSize?: number;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export function DataTable<T>({
   columns,
   data,
   isPaginated,
   pageSize = 10,
+  className,
 }: DataTableProps<T>) {
   const [stableData] = useState(data);
 
@@ -62,8 +63,8 @@ export function DataTable<T>({
   const numPages = isPaginated ? Math.ceil(data.length / pageSize) : 1;
 
   return (
-    <>
-      <Table>
+    <div className={cn(className)}>
+      <Table className="whitespace-nowrap">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => {
             return (
@@ -230,6 +231,6 @@ export function DataTable<T>({
           </PaginationContent>
         </Pagination>
       )}
-    </>
+    </div>
   );
 }

@@ -1,12 +1,11 @@
-import getTournaments from "@/data/getTournaments";
 import { NoDataFound } from "../../no-data-found";
 import { TeamTournamentRow, teamTournamentTableColumns } from "./columns";
 import { format } from "date-fns";
 import { DataTable, DataTableProps } from "@/components/ui/data-table/table";
-import { TeamTournament } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import Link from "next/link";
+import getTeamTournaments from "@/data/getTeamTournaments";
 
 type TeamTournamentTableProps = {
   teamId?: string;
@@ -18,7 +17,7 @@ export async function TeamTournamentTable({
   limit,
   ...props
 }: TeamTournamentTableProps) {
-  const { success, data } = await getTournaments(teamId);
+  const { success, data } = await getTeamTournaments(teamId);
 
   if (!success || !data || data.length === 0) {
     return (
@@ -45,11 +44,12 @@ API to fetch it for us, to see data, please upload manually."
   }
 
   const transformedData: TeamTournamentRow[] = data
-    .map((tournament: TeamTournament) => ({
+    .map((tournament) => ({
       ...tournament,
+      teamName: tournament.Team.name,
       place: `#${tournament.place}`,
       score: tournament.scoreTotal,
-      week: format(tournament.week, "MMM d, y"),
+      week: format(tournament.week, "M/d"),
       href: `/dashboard/team-tournament/${tournament.id}`,
     }))
     .slice(0, limit);

@@ -21,7 +21,7 @@ export const teamTournamentTableColumns: ColumnDef<TeamTournamentRow>[] = [
       isAfter(new Date(a.original.week), new Date(b.original.week)) ? 1 : -1,
   }),
   columnHelper.accessor("teamName", {
-    header: "Team Name",
+    header: "Team",
     sortingFn: "alphanumeric",
   }),
   columnHelper.accessor("score", {
