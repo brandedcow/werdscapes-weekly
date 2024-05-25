@@ -9,20 +9,21 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { CreateTeamForm } from "./forms/create-team-form";
 import { FindTeamForm } from "./forms/find-team-form";
 import { Label } from "../ui/label";
 import { SelectedInfo } from "./selected-info";
+import { CreatePlayerForm } from "./forms/create-player-form";
+import { FindPlayerForm } from "./forms/find-player-form";
 
-export function SelectTeamCard() {
-  const { team } = useUploadFormStore();
+export function SelectPlayerCard() {
+  const { player } = useUploadFormStore();
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Select Team</CardTitle>
+        <CardTitle>Select Player</CardTitle>
         <CardDescription>
-          Create a new team, or find one that already exists to upload scores
+          Create a new player, or find one that already exists to upload scores
           to.
         </CardDescription>
       </CardHeader>
@@ -37,15 +38,15 @@ export function SelectTeamCard() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="create">
-            <CreateTeamForm />
+            <CreatePlayerForm />
           </TabsContent>
           <TabsContent value="find">
-            <FindTeamForm />
+            <FindPlayerForm />
           </TabsContent>
         </Tabs>
         <Card className="p-4 space-y-2 bg-secondary text-secondary-foreground">
-          <Label>Selected Team</Label>
-          <SelectedInfo item={team} />
+          <Label>Selected Player</Label>
+          <SelectedInfo item={player} />
         </Card>
       </CardContent>
     </Card>

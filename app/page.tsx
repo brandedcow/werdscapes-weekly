@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TeamTournamentTable } from "@/components/shared/tables/team-tournament-table/container";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { IndividualTournamentTable } from "@/components/shared/tables/individual-tournament-table/container";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
           <CardTitle>Latest Individual Tournaments</CardTitle>
         </CardHeader>
         <CardContent>
-          <TeamTournamentTable />
+          <IndividualTournamentTable />
         </CardContent>
       </Card>
     </div>

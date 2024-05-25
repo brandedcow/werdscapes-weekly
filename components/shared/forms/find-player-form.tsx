@@ -1,30 +1,32 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
-import { Team } from "@prisma/client";
+import { Player } from "@prisma/client";
 import { useState } from "react";
 import { z } from "zod";
 import { useDebouncedCallback } from "use-debounce";
-import getTeams from "@/data/getTeams";
 import { v4 } from "uuid";
 import { SelectedInfo } from "../selected-info";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useUploadFormStore } from "@/data/useUploadFormStore";
+import getPlayers from "@/data/getPlayers";
 
-const findTeamFormSchema = z.object({
+const findPlayerFormSchema = z.object({
   name: z.string().min(1),
 });
 
-export type findTeamFormValues = z.infer<typeof findTeamFormSchema>;
+export type findPlayerFormValues = z.infer<typeof findPlayerFormSchema>;
 
-export function FindTeamForm() {
-  const [searchResults, setSearchResults] = useState<Team[]>([]);
-  const { setTeam } = useUploadFormStore();
+export function FindPlayerForm() {
+  const [searchResults, setSearchResults] = useState<Player[]>([]);
+  const { setPlayer } = useUploadFormStore();
 
   const debouncedSearch = useDebouncedCallback(
     async (value: string) => {
-      const { success, data } = await getTeams(value);
+      const { success, data } = await getPlayers(value);
+
+      console.log(success, data);
 
       if (!success || data === undefined) return;
 
@@ -36,18 +38,18 @@ export function FindTeamForm() {
 
   return (
     <div className="space-y-2">
-      <Label>Find Team</Label>
+      <Label>Find Player</Label>
       <Input
-        placeholder="Search by Team Name"
+        placeholder="Search by Player Name"
         onChange={(event) => debouncedSearch(event.target.value)}
       />
-      {searchResults.map((team) => (
+      {searchResults.map((player) => (
         <Card
           key={v4()}
           className="p-2 hover:bg-secondary transition-colors"
-          onClick={() => setTeam(team)}
+          onClick={() => setPlayer(player)}
         >
-          <SelectedInfo item={team} />
+          <SelectedInfo item={player} />
         </Card>
       ))}
     </div>

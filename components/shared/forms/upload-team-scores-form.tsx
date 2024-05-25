@@ -31,7 +31,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
-import { SelectTeamCardTeamInfo } from "../select-team-card-team-info";
+import { SelectedInfo } from "../selected-info";
 import getTeamMembersByTeamId from "@/data/by-team-id/getTeamMembersByTeamId";
 
 const uploadTeamScoresFormSchema = z.object({
@@ -367,7 +367,7 @@ export default function UploadTeamTournamentScoresForm() {
           >
             Selected Team
           </Label>
-          <SelectTeamCardTeamInfo team={team} />
+          <SelectedInfo item={team} />
         </Card>
         <Button
           type="submit"
