@@ -1,12 +1,5 @@
 "use client";
 
-import {
-  Command,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import { Label } from "@/components/ui/label";
 import { Team } from "@prisma/client";
 import { useState } from "react";
@@ -31,13 +24,11 @@ export function FindTeamForm() {
 
   const debouncedSearch = useDebouncedCallback(
     async (value: string) => {
-      console.log("query for team", value);
       const { success, data } = await getTeams(value);
 
       if (!success || data === undefined) return;
 
       setSearchResults(() => data);
-      console.log(searchResults);
     },
     300,
     { maxWait: 2000 }

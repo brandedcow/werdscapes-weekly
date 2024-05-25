@@ -23,14 +23,14 @@ export async function TeamTournamentTable({
   if (!success || !data || data.length === 0) {
     return (
       <NoDataFound
-        type="tournaments"
+        type="Team Tournaments"
         description="There is no tournament data to be seen here. Since there is no public
 API to fetch it for us, to see data, please upload manually."
         buttonComponent={() => (
           <>
             <SignedIn>
               <Button asChild>
-                <Link href="/upload-scores">Upload Scores</Link>
+                <Link href="/upload-team-scores">Upload Team Scores</Link>
               </Button>
             </SignedIn>
             <SignedOut>

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import UploadForm from "./upload-scores-form";
+import UploadForm from "./forms/upload-team-scores-form";
 
 export function UploadScreenshotCard() {
   return (

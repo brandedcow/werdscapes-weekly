@@ -59,34 +59,31 @@ export function OCRForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="flex flex-col gap-y-2"
+        className="flex flex-col gap-y-4"
       >
-        <div className="flex items-end">
-          <FormField
-            control={form.control}
-            name="screenshots"
-            render={({
-              field: { onChange, value, ...fieldProps },
-              fieldState,
-            }) => (
-              <FormItem>
-                <FormLabel>Select Screenshots</FormLabel>
-                <div className="flex">
-                  <FormControl>
-                    <Input
-                      {...fieldProps}
-                      type="file"
-                      multiple
-                      onChange={(event) => onChange(event.target.files)}
-                      className="rounded-tr-none rounded-br-none"
-                    />
-                  </FormControl>
-                </div>
-                <FormMessage>{fieldState.error?.message}</FormMessage>
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="screenshots"
+          render={({
+            field: { onChange, value, ...fieldProps },
+            fieldState,
+          }) => (
+            <FormItem>
+              <FormLabel>Select Screenshots</FormLabel>
+              <div className="flex">
+                <FormControl>
+                  <Input
+                    {...fieldProps}
+                    type="file"
+                    multiple
+                    onChange={(event) => onChange(event.target.files)}
+                  />
+                </FormControl>
+              </div>
+              <FormMessage>{fieldState.error?.message}</FormMessage>
+            </FormItem>
+          )}
+        />
         <Button
           type="submit"
           className="flex gap-x-1 items-center"

@@ -19,15 +19,14 @@ model TournamentScore {
 
   score Int
 
-  playerId   String
-  playerName String
-  Player     Player @relation(fields: [playerId, playerName], references: [id, name])
+  playerId String
+  Player   Player @relation(fields: [playerId], references: [id])
 
-  individualTournamentId String
-  IndividualTournament   IndividualTournament @relation(fields: [individualTournamentId], references: [id], onDelete: Cascade)
+  individualTournamentId String?
+  IndividualTournament   IndividualTournament? @relation(fields: [individualTournamentId], references: [id], onDelete: Cascade)
 
-  teamTournamentId String
-  TeamTournament   TeamTournament @relation(fields: [teamTournamentId], references: [id], onDelete: Cascade)
+  teamTournamentId String?
+  TeamTournament   TeamTournament? @relation(fields: [teamTournamentId], references: [id], onDelete: Cascade)
 
   @@unique([playerId, individualTournamentId])
   @@unique([playerId, teamTournamentId])
@@ -49,9 +48,8 @@ model Player {
 
   name String
 
-  teamId   String
-  teamName String
-  Team     Team   @relation(fields: [teamId, teamName], references: [id, name])
+  teamId String?
+  Team   Team?   @relation(fields: [teamId], references: [id])
 
   isCurrentTeam Boolean @default(true)
 

@@ -17,8 +17,6 @@ import { SelectTeamCardTeamInfo } from "./select-team-card-team-info";
 export function SelectTeamCard() {
   const { team } = useUploadFormStore();
 
-  console.log(team);
-
   return (
     <Card>
       <CardHeader>
