@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 export function PageHeader() {
   return (
-    <div className="w-full flex justify-between items-center pb-6 gap-x-4">
+    <div className="w-full flex justify-between items-center pb-4 gap-x-4">
       <Link href="/">
         <h1 className="text-2xl flex gap-x-2">
           <p>🏆</p>

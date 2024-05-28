@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { NavBar } from "@/components/shared/nav-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,6 +37,7 @@ export default function RootLayout({
               )}
             >
               <PageHeader />
+              <NavBar />
               <ScrollArea className="w-full">{children}</ScrollArea>
             </main>
           </ThemeProvider>
