@@ -16,11 +16,11 @@ type StatCardProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 export function StatCard({ stat, className, ...props }: StatCardProps) {
-  const { displayName, timeframes, type } = stat;
+  const { displayName, variants } = stat;
   const [currIdx, setCurrIdx] = useState<number>(0);
-  const [timeframeData] = useState(Object.entries(timeframes ?? {}));
+  const [timeframeData] = useState(Object.entries(variants ?? {}));
 
-  if (!timeframes) return null;
+  if (!variants) return null;
 
   if (timeframeData.length === 0) return null;
 
@@ -30,10 +30,7 @@ export function StatCard({ stat, className, ...props }: StatCardProps) {
     );
   };
 
-  const roundedStat = Math.round(
-    (Number(timeframeData[currIdx][1]) * 100) / 100
-  );
-  const displayStat = `${roundedStat}` + (type === "percent" ? "%" : "");
+  const displayStat = timeframeData[currIdx][1];
 
   return (
     <Card

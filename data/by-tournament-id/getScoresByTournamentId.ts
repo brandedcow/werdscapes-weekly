@@ -4,8 +4,8 @@ import { prisma } from "@/lib/db";
 
 export default async function getScoresByTournamentId(tournamentId: string) {
   try {
-    const scores = await prisma.score.findMany({
-      where: { tournamentId },
+    const scores = await prisma.tournamentScore.findMany({
+      where: { teamTournamentId: tournamentId },
       include: { Player: true },
       orderBy: {
         score: "desc",

@@ -50,7 +50,7 @@ API to fetch it for us, to see data, please upload manually."
       place: `#${tournament.place}`,
       score: tournament.scoreTotal,
       week: format(tournament.week, "M/d"),
-      href: `/dashboard/team-tournament/${tournament.id}`,
+      href: `/team-tournament/${tournament.id}`,
     }))
     .slice(0, limit);
 
