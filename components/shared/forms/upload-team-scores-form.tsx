@@ -162,17 +162,12 @@ export default function UploadTeamTournamentScoresForm() {
     }
 
     if (team) {
-      console.log("setvalue for team", team);
       form.setValue("team", team);
       fetchTeamMembers();
     }
 
-    console.log("setvalue for place", place);
-
     form.setValue("place", place);
   }, [place, data, append, form, team, replace]);
-
-  console.log(form.formState.errors);
 
   return (
     <Form {...form}>

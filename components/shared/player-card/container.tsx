@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { NoDataFound } from "@/components/shared/no-data-found";
-import { ScoreLineChart } from "./score-line-chart";
+import { ScoreLineChart } from "../charts/player-score-line-chart";
 import { prisma } from "@/lib/db";
 import { format } from "date-fns";
 import { PlayerTrendsInfo } from "./player-trends-info";

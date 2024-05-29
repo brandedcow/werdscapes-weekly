@@ -19,7 +19,7 @@ interface ScoreLineChartProps {
   height?: number | string;
 }
 
-export function ScoreLineChart({ scores, height }: ScoreLineChartProps) {
+export function DataChart({ scores, height }: ScoreLineChartProps) {
   return (
     <div>
       <ResponsiveContainer width="100%" height={height ?? "100%"}>

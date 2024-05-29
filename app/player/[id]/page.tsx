@@ -1,7 +1,5 @@
 import { NoDataFound } from "@/components/shared/no-data-found";
 import { QuickGlanceCard } from "@/components/shared/quick-glance-card";
-import { TeamTournamentTable } from "@/components/shared/tables/team-tournament-table/container";
-import { TeamMemberTable } from "@/components/shared/tables/team-member-table/container";
 import {
   Card,
   CardContent,
@@ -10,7 +8,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import getPlayerById from "@/data/by-player-id/getPlayerById";
-import { ScoreLineChart } from "@/components/shared/player-card/score-line-chart";
+import { PlayerTournamentScoresTable } from "@/components/shared/tables/player-tournament-scores-table/container";
+import { PlayerScoreLineChart } from "@/components/shared/charts/player-score-line-chart/container";
 
 export default async function PlayerPage({
   params,
@@ -33,6 +32,7 @@ export default async function PlayerPage({
     <div className="flex flex-col gap-y-4 w-svw pr-12">
       <CardTitle>⛨ {data.name}</CardTitle>
       <CardDescription>ID: {params.id}</CardDescription>
+
       <QuickGlanceCard type="player" id={params.id} />
 
       <Card>
@@ -40,7 +40,10 @@ export default async function PlayerPage({
           <CardTitle>Score History</CardTitle>
         </CardHeader>
         <CardContent>
-          <ScoreLineChart scores={[]} />
+          <PlayerScoreLineChart playerId={params.id} />
+          {data.teamId && (
+            <PlayerTournamentScoresTable playerId={params.id} limit={4} />
+          )}
         </CardContent>
       </Card>
     </div>

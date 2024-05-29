@@ -23,8 +23,6 @@ export default async function getPOintTotalByPlayerId(id: string) {
         "playerId" = ${id}
     `;
 
-    console.log(data);
-
     const parsed = {
       allTime: data.length !== 1 ? 0 : Number(data[0].total_all_time),
       lastMonth: data.length !== 1 ? 0 : Number(data[0].total_monthly),
