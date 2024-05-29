@@ -15,8 +15,8 @@ export default async function getHighScoreByPlayerId(id: string) {
           select 
             score as all_time_high_score
           from
-            "Score"
-            join "Player" on "Score"."playerName" = "Player".name
+            "TournamentScore"
+            join "Player" on "TournamentScore"."playerId" = "Player".id
           where
             "Player".id = ${id}
           order by score desc
@@ -26,12 +26,12 @@ export default async function getHighScoreByPlayerId(id: string) {
           select
             score as last_month_high_score
           from
-            "Score"
-            join "Player" on "Score"."playerName" = "Player".name
-            join "Tournament" on "Score"."tournamentId" = "Tournament".id
+            "TournamentScore"
+            join "Player" on "TournamentScore"."playerId" = "Player".id
+            join "TeamTournament" on "TournamentScore"."teamTournamentId" = "TeamTournament".id
           where
             "Player".id = ${id}
-            and "Tournament".week between now() - interval '4 week' and now()
+            and "TeamTournament".week between now() - interval '4 week' and now()
           order by score desc
           limit 1
         )

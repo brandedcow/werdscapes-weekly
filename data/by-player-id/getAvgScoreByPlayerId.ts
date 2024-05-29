@@ -15,21 +15,21 @@ export default async function getAvgScoreByPlayerId(id: string) {
           select
             avg(score) as all_time_average_score
           from
-            "Score"
-            join "Player" on "Score"."playerName" = "Player".name
+            "TournamentScore"
+            join "Player" on "TournamentScore"."playerId" = "Player".id
           where
-            "Player".id = 'clw9t89zk000ce67d1a2qk185'
+            "Player".id = ${id}
         ),
         last_month as (
           select
             avg(score) as last_month_average_score
           from
-            "Score"
-            join "Player" on "Score"."playerName" = "Player".name
-            join "Tournament" on "Score"."tournamentId" = "Tournament".id
+            "TournamentScore"
+            join "Player" on "TournamentScore"."playerId" = "Player".id
+            join "TeamTournament" on "TournamentScore"."teamTournamentId" = "TeamTournament".id
           where
-            "Player".id = 'clw9t89zk000ce67d1a2qk185'
-            and "Tournament".week between now() - interval '4 week' and now()
+            "Player".id = ${id}
+            and "TeamTournament".week between now() - interval '4 week' and now()
         )
         select * from all_time, last_month
     `;
