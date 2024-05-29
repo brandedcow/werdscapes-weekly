@@ -11,13 +11,13 @@ export default function Home() {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Latest Team Tournaments</CardTitle>
-          <Button variant="link" className="underline">
+          <Button variant="link">
             <Link href="/team-tournaments">{"View All ->"}</Link>
           </Button>
         </CardHeader>
         <CardContent>
           <ScrollArea>
-            <TeamTournamentTable />
+            <TeamTournamentTable limit={10} />
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </CardContent>
@@ -27,7 +27,7 @@ export default function Home() {
           <CardTitle>Latest Individual Tournaments</CardTitle>
         </CardHeader>
         <CardContent>
-          <IndividualTournamentTable />
+          <IndividualTournamentTable limit={10} />
         </CardContent>
       </Card>
     </div>

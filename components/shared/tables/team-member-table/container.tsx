@@ -20,7 +20,7 @@ export async function TeamMemberTable({
       MAX(s.score) AS "personalRecord",
       SUM(s.score) AS "totalScore"
     FROM "Player" p
-    INNER JOIN "Score" s ON p.name = s."playerName"
+    INNER JOIN "TournamentScore" s ON p.id = s."playerId"
     where p."teamId" = ${teamId}
     GROUP BY p.id, p.name
     ORDER BY "totalScore" desc;
@@ -32,7 +32,7 @@ export async function TeamMemberTable({
       averageScore: Number(row.averageScore),
       personalRecord: Number(row.personalRecord),
       totalScore: Number(row.totalScore),
-      href: `/dashboard/player/${row.id}`,
+      href: `/player/${row.id}`,
     }))
     .slice(0, limit);
 

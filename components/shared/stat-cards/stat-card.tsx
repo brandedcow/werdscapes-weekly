@@ -38,13 +38,15 @@ export function StatCard({ stat, className, ...props }: StatCardProps) {
       {...props}
       onClick={handleCardClick}
     >
-      <CardHeader>
+      <CardHeader className="flex flex-col h-full justify-between">
         <CardDescription>{displayName}</CardDescription>
-        <CardTitle className="pt-3">{displayStat}</CardTitle>
-        <Separator />
-        <CardDescription className="text-xs">
-          {toCapitalCase(timeframeData[currIdx][0], { from: "camel_case" })}
-        </CardDescription>
+        <div className="space-y-1">
+          <CardTitle className="pt-3">{displayStat}</CardTitle>
+          <Separator />
+          <CardDescription className="text-xs">
+            {toCapitalCase(timeframeData[currIdx][0], { from: "camel_case" })}
+          </CardDescription>
+        </div>
       </CardHeader>
     </Card>
   );

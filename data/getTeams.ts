@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/db";
 
-export default async function getTeams(query: string) {
+export default async function getTeams(query?: string) {
   try {
     const results = await prisma.team.findMany({
       where: {

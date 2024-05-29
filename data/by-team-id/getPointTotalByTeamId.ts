@@ -13,8 +13,6 @@ export default async function getPointTotalByTeamId(teamId: string) {
   try {
     const totals: PointTotalResult[] = await prisma.$queryRaw`
       select
-        "Team".id,
-        T."teamName",
         sum(
           case
             when T.week between now() - interval '1 month' and now()  then T."scoreTotal"
@@ -23,20 +21,17 @@ export default async function getPointTotalByTeamId(teamId: string) {
         ) as "last_month_stars",
         sum(T."scoreTotal") as "total_stars"
       from
-        "Tournament" T
-        join "Team" on "Team".name = T."teamName"
+        "TeamTournament" T
+        join "Team" on "Team".id = T."teamId"
       where
         "Team".id = ${teamId}
-      group by
-        T."teamName",
-        "Team".id
       order by
         "total_stars" desc;
     `;
 
     const results = {
-      lastMonth: totals.length !== 1 ? 0 : totals[0].last_month_stars,
-      allTime: totals.length !== 1 ? 0 : totals[0].total_stars,
+      lastMonth: totals.length !== 1 ? 0 : Number(totals[0].last_month_stars),
+      allTime: totals.length !== 1 ? 0 : Number(totals[0].total_stars),
     };
 
     return { success: true, data: results };

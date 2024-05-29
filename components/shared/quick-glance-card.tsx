@@ -1,13 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { PlayerTrendsInfo } from "./player-card/player-trends-info";
+import { PlayerStats } from "./stat-cards/player-stats";
+import TeamStats from "./stat-cards/team-stats";
 import { TournamentStats } from "./stat-cards/tournament-stats";
-import { TeamTrendsInfo } from "./team-card/team-trends-info";
 
 export function QuickGlanceCard({
   id,
   type,
 }: {
-  type?: "team" | "individual" | "tournament";
+  type?: "team" | "player" | "individual" | "tournament";
   id?: string;
 }) {
   if (!id) return null;
@@ -19,12 +19,12 @@ export function QuickGlanceCard({
       </CardHeader>
       <CardContent>
         {type === "team" ? (
-          <TeamTrendsInfo teamId={id} />
+          <TeamStats id={id} />
         ) : type === "tournament" ? (
           <TournamentStats id={id} />
-        ) : (
-          <PlayerTrendsInfo playerId={id} />
-        )}
+        ) : type === "player" ? (
+          <PlayerStats id={id} />
+        ) : null}
       </CardContent>
     </Card>
   );
