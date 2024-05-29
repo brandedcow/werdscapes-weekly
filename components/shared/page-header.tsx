@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { SearchIconButton } from "./search-icon-button";
 import { cn } from "@/lib/utils";
+import { UploadScoresButton } from "./buttons/upload-scores-button";
 
 export function PageHeader() {
   return (
@@ -21,6 +22,7 @@ export function PageHeader() {
           </Button>
         </SignedOut>
         <SignedIn>
+          <UploadScoresButton />
           <UserButton />
         </SignedIn>
         <SearchIconButton />

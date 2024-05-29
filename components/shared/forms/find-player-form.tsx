@@ -24,7 +24,7 @@ export function FindPlayerForm() {
 
   const debouncedSearch = useDebouncedCallback(
     async (value: string) => {
-      const { success, data } = await getPlayers(value);
+      const { success, data } = await getPlayers(value, 5);
 
       if (!success || data === undefined) return;
 

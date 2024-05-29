@@ -12,6 +12,8 @@ type TeamTableProps = {
 export async function PlayerTable({ teamId, limit, ...props }: TeamTableProps) {
   const { success, data } = await getPlayers();
 
+  console.log(data);
+
   if (!success || !data || data.length === 0) {
     return (
       <NoDataFound
@@ -22,14 +24,12 @@ export async function PlayerTable({ teamId, limit, ...props }: TeamTableProps) {
     );
   }
 
-  const transformedData: PlayerRow[] = data
-    .map((player) => ({
-      ...player,
-      playerName: player.name,
-      teamName: player.Team?.name ?? "No Team",
-      href: `/player/${player.id}`,
-    }))
-    .slice(0, limit);
+  const transformedData: PlayerRow[] = data.map((player) => ({
+    ...player,
+    playerName: player.name,
+    teamName: player.Team?.name ?? "No Team",
+    href: `/player/${player.id}`,
+  }));
 
   return (
     <DataTable {...props} data={transformedData} columns={playerTableColumns} />
