@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/db";
 
-export default async function getPlayers(query: string) {
+export default async function getPlayers(query?: string) {
   try {
     const results = await prisma.player.findMany({
       where: {
@@ -10,6 +10,9 @@ export default async function getPlayers(query: string) {
           contains: query,
           mode: "insensitive",
         },
+      },
+      include: {
+        Team: true,
       },
       take: 5,
     });

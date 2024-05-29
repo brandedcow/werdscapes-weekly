@@ -26,8 +26,6 @@ export function FindPlayerForm() {
     async (value: string) => {
       const { success, data } = await getPlayers(value);
 
-      console.log(success, data);
-
       if (!success || data === undefined) return;
 
       setSearchResults(() => data);
