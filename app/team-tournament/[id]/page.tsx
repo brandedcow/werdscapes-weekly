@@ -1,3 +1,5 @@
+import { DeleteTeamTournamentButton } from "@/components/shared/buttons/delete-tournament-button";
+import { EditTeamTournamentButton } from "@/components/shared/buttons/edit-team-tournament-button";
 import { NoDataFound } from "@/components/shared/no-data-found";
 import { QuickGlanceCard } from "@/components/shared/quick-glance-card";
 import { ScoresCard } from "@/components/shared/scores-card";
@@ -29,9 +31,15 @@ export default async function TournamentDetailPage({
 
   return (
     <div className="flex flex-col gap-y-4">
-      <CardTitle>
-        {`#${data.place} ${data.Team.name} | ${format(data.week, "MMM d, y")}`}
-      </CardTitle>
+      <div className="flex justify-between items-center">
+        <CardTitle>
+          {`#${data.place} ${data.Team.name} | ${format(
+            data.week,
+            "MMM d, y"
+          )}`}
+        </CardTitle>
+        <EditTeamTournamentButton id={params.id} />
+      </div>
       <CardDescription>ID: {params.id}</CardDescription>
       <QuickGlanceCard type="tournament" id={params.id} />
       <ScoresCard tournamentId={params.id} />

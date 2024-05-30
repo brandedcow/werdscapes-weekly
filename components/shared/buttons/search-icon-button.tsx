@@ -1,13 +1,13 @@
 import { Search } from "lucide-react";
-import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Button } from "../../ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandList,
-} from "../ui/command";
+} from "../../ui/command";
 
 export function SearchIconButton() {
   return (

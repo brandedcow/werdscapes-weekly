@@ -1,22 +1,24 @@
 "use client";
 
-import { deleteTournament } from "@/actions/deleteTournament";
-import { Button } from "../ui/button";
-import { useToast } from "../ui/use-toast";
+import { deleteTeamTournament } from "@/actions/deleteTeamTournament";
+import { Button } from "../../ui/button";
+import { useToast } from "../../ui/use-toast";
 import { useRouter } from "next/navigation";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { CardDescription } from "../ui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { CardDescription } from "../../ui/card";
 
-interface DeleteTournamentButtonProps {
+interface DeleteTeamTournamentButtonProps {
   id: string;
 }
 
-export function DeleteTournamentButton({ id }: DeleteTournamentButtonProps) {
+export function DeleteTeamTournamentButton({
+  id,
+}: DeleteTeamTournamentButtonProps) {
   const { toast } = useToast();
   const router = useRouter();
 
   const handleSubmit = async () => {
-    const { success, data, error } = await deleteTournament(id);
+    const { success, data, error } = await deleteTeamTournament(id);
 
     if (success && data) {
       toast({
@@ -24,7 +26,7 @@ export function DeleteTournamentButton({ id }: DeleteTournamentButtonProps) {
         description: data,
       });
 
-      router.replace("/dashboard");
+      router.replace("/");
     } else {
       toast({
         title: "Delete Error",

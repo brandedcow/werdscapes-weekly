@@ -10,6 +10,9 @@ export default async function getTournamentById(id: string) {
           orderBy: {
             score: "desc",
           },
+          include: {
+            Player: true,
+          },
         },
       },
     });

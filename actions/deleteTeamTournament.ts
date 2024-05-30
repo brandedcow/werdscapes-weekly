@@ -3,15 +3,18 @@
 import { prisma } from "@/lib/db";
 import { format } from "date-fns";
 
-export async function deleteTournament(id: string) {
+export async function deleteTeamTournament(id: string) {
   try {
-    const deletedTournament = await prisma.tournament.delete({
+    const deletedTournament = await prisma.teamTournament.delete({
       where: { id },
+      include: {
+        Team: true,
+      },
     });
 
-    const { week, teamName } = deletedTournament;
+    const { week, Team } = deletedTournament;
 
-    let message = `Deleted tournament for ${teamName} on ${format(
+    let message = `Deleted tournament for ${Team.name} on ${format(
       week,
       "MMM d, y"
     )}`;

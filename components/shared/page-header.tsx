@@ -2,7 +2,7 @@ import Link from "next/link";
 import { DarkModeToggle } from "./dark-mode-toggle";
 import { Button } from "../ui/button";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { SearchIconButton } from "./search-icon-button";
+import { SearchIconButton } from "./buttons/search-icon-button";
 import { cn } from "@/lib/utils";
 import { UploadScoresButton } from "./buttons/upload-scores-button";
 
