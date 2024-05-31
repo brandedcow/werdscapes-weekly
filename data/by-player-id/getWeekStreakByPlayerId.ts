@@ -12,15 +12,15 @@ export default async function getWeekStreakByPlayerId(id: string) {
       with
         player_week_activity as (
           select
-            "Score"."playerName",
+            "TournamentScore"."playerId",
             week,
             "Player".id as player_id
           from
-            "Score"
-            inner join "Tournament" on "Tournament".id = "Score"."tournamentId"
-            inner join "Player" on "Player".name = "Score"."playerName"
+            "TournamentScore"
+            inner join "TeamTournament" on "TeamTournament".id = "TournamentScore"."teamTournamentId"
+            inner join "Player" on "Player".id = "TournamentScore"."playerId"
           where
-            "Score".score <> 0
+            "TournamentScore".score <> 0
           order by
             week asc
           
@@ -28,7 +28,7 @@ export default async function getWeekStreakByPlayerId(id: string) {
         with_previous_week as (
           select
             *,
-            lag(week) over (partition by "playerName" order by week asc) as prevWeek
+            lag(week) over (partition by "playerId" order by week asc) as prevWeek
           from 
             player_week_activity
         ),
@@ -43,12 +43,12 @@ export default async function getWeekStreakByPlayerId(id: string) {
         streak_identified as (
           select
             *,
-            sum(streak_changed) over (partition by "playerName" order by week asc) as streak_count
+            sum(streak_changed) over (partition by "playerId" order by week asc) as streak_count
           from 
             streak_change
         )
       select
-        "playerName",
+        "playerId",
         week,
         player_id,
         streak_count
@@ -61,7 +61,7 @@ export default async function getWeekStreakByPlayerId(id: string) {
     `;
 
     const parsed = {
-      current: results.length !== 1 ? 0 : results[0].streak_count,
+      current: results.length !== 1 ? 0 : Number(results[0].streak_count),
     };
 
     return { success: true, data: parsed };

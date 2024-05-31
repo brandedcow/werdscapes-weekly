@@ -15,26 +15,26 @@ export default async function getWinPercentByTeamId(teamId: string) {
           SELECT 
             sum(
               case
-                when "Tournament".place between 1 and 5 then 1
+                when "TeamTournament".place between 1 and 5 then 1
                 else 0
               end
             ) as total_tournament_wins,
             COUNT(*) AS total_tournament_count,
             sum(
               case
-                when "Tournament".place between 1 and 5
-                  and "Tournament".week between now() - interval '4 week' and now() then 1
+                when "TeamTournament".place between 1 and 5
+                  and "TeamTournament".week between now() - interval '4 week' and now() then 1
                 else 0
               end
             ) as last_month_wins,
             sum(
               case
-                when "Tournament".week between now() - interval '4 week' and now() then 1
+                when "TeamTournament".week between now() - interval '4 week' and now() then 1
                 else 0
               end
             ) as last_month_tournament_count
-          FROM "Tournament"
-            join "Team" on "teamName" = "Team".name
+          FROM "TeamTournament"
+            join "Team" on "teamId" = "Team".id
           where "Team".id = ${teamId}
         )
         SELECT

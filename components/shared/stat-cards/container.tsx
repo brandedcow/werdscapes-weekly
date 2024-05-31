@@ -3,12 +3,11 @@ import { StatCard } from "./stat-card";
 
 type Stat = number | string | null;
 
-type StatTimeframes = { [timeframe: string]: Stat };
+type StatVariants = { [variant: string]: Stat };
 
 export type StatData = {
   displayName: string;
-  timeframes: StatTimeframes | undefined;
-  type: "number" | "percent";
+  variants: StatVariants | undefined;
 };
 
 interface StatCardsProps {

@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/shared/team-card/team-member-table"
+    "components/shared/tables/team-member-table"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,6 @@
 "use server";
 
+import { metadata } from "@/app/layout";
 import { ocrAPIConfig } from "@/lib/config";
 import { parseOCRTokens } from "@/lib/parseOCRTokens";
 import { bufferToBase64 } from "@/lib/utils";
@@ -37,6 +38,9 @@ export const scanScreenshot = async (formData: FormData) => {
           left: 280,
           width: 790,
           height: 1100,
+        })
+        .jpeg({
+          quality: 50,
         })
         .toBuffer();
       const ocrResult = await ocrSpace(

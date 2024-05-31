@@ -1,128 +1,164 @@
-# Dashboard Page
+# Wordscapes Weekly
 
-## Team Tournament History
+Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see results.
 
-=> Links to Upload Scores Page
+1. Track Weekly Tournament Stats
+2. Weekly Insights
+3. Performance Trends
+4. Goal Setting
 
-1. Tournament Table
+\*PeopleFun does not offer any public API to access tournament and player data, so manual uploading of stats is required. Currently uploading screenshots is the best way to get this data.
 
-- Date
-- Team Name
-- Score
-- Place
-  => Rows Link to Team Tournament Page
+## Header
 
-## ? Indie Tournament History
+-> Link to [Home](#home)
 
-## ? Login Option
+1. Create Account -> Link to [Register](#register)
+2. Profile -> Link to [Profile](#profile)
+3. Dark Mode Toggle
+4. ? Nav Bar
+   1. Home / Dashboard
+   2. Team Tournaments
+   3. Individual Tournaments
+   4. Players
+   5. Teams
 
-======================================
+- Page Breadcrumbs
 
-# Team Tournament Page
+## Pages
 
-=> Links to Edit Tournament Page
+### Register
 
-1. Quick Stats 🛠️
+-> Link to [Login](#login)
 
-- Total Score
-- Participation %
-- Score / Players
-- Player Count
+### Login
 
-2. Score Table
+-> link to [Register](#register)
 
-- (#)
-- Player Name
-- Score
-  => Rows Link to Player Page
+### Home
 
-======================================
+1. Search Feature (Team, Player)
+2. Team Tournament Table -> Link to [Team Tournament](#team-tournaments)
+   1. Week
+   2. Team Name
+   3. Score
+   4. Place
+      -> Row Link to [Team Tournament Detail](#team-tournament-detail)
+   - No Data (CTA) -> Link to [Register](#register)
+3. Individual Tournament Table -> Link to [Individual Tournament](#individual-tournaments)
+   1. Week
+   2. Player Name
+   3. Score
+   4. Place
+      -> Row Link to [Individual Tournament Detail]()
+   - No Data (CTA) -> Link to [Register](#register)
 
-# Player Page.
+### Dashboard (WIP)
 
-=> Links to Team Page
+1. ## Weekly Goal
+2. [Player Detail](#player-detail)
+   - Quick Glance
+   - Score History
+   - Individual Tournament
+3. Tournament Table
+   a. Indie Tab
+   b. Team Tab
 
-- ? Tags (For Achievements)
+---
 
-## Trends & Records => (Link to separate page)
+### Team Tournaments
 
-- Highest Score
-- Average Score (4 Wks)
-- Week Streak
-- ? Total Points (All Time)
-- ? percentage bracket
+1. Tournament Table - Week - Team Name - Score - Place
+   -> Row Link to [Team Tournament Detail](#team-tournament-detail)
+2. Searchable
+3. Filterable
 
-## Score History
+### Team Tournament Detail
 
-1. Line Chart
-2. Team Tournament List
-3. ? Indie Tournament List
-4. ? range bar chart by month
+-> Link to [Team Detail](#team-detail)
+-> Link to [Edit Team Tournament](#edit-team-tournament)
 
-## Awards & Accolades => (Link to separate page)
+1. Quick Glance (Stats + Weekly Insights)
+   - Total Score
+   - Participation % / ?Player Count
+   - Average Score
+2. Score Table - (#) - Player Name - Score
+   -> Row Link to [Player Detail](#player-detail)
 
-1. Individual Achievements
+### Edit Team Tournament
 
-- High Scorer (1k,2k,3k,4k)
-- Active Participant(10%,25%,50%,100%)
+1. Update Tournament Info
+2. Update Player Scores
 
-2. Weekly Team Awards
+---
 
-- Biggest Improvement
-- Top Scorer
-- Top 3
+### Individual Tournaments
 
-======================================
+1. Tournament Table - Week - Player Name - Score - Place
+   -> Row Link to [Tournament Detail](#individual-tournament-detail)
+2. Searchable
+3. Filterable
 
-# Team Page
+### Individual Tournament Detail
 
-## Quick Stats
+-> Link to [Player Detail](#player-detail)
+-> Link to [Edit Individual Tournament](#edit-individual-tournament)
 
-- Average Total Per week
-- Roster Active %
-- Top 5 % All Time
-- Total Points All Time
+### Edit Individual Tournament
 
-## Latest Tournaments (=> Link to Team Tournament Performance Analytics Page)
+---
 
-- Limit to 4 ... or create pagination table 🛠️
+### Team Detail
 
-## Team Members (=> Link to Players Comparison / Analytics Page)
+1. Quick Glance
+   - Average Score
+   - Participation %
+   - Top 5 %
+   - Total Points
+2. Latest Tournaments -> Link to [Team Tournament Performance Analytics](#team-tournament-performance-analytics)
+   -> Row Link to [Team Tournament Detail](#team-tournament-detail)
+3. Team Member Table -> Link to [Player Comparison](#player-comparison)
+   - Name
+   - Average Score
+   - Personal Records
+   - Total Points
 
-1. Team Member Table
+- ? Ability to mark players as removed
 
-- name
-- avg score (4 Wks)
-- personal record
-- total points
+### Team Performance Analytics
 
-======================================
+---
 
-# Team Tournament Performance Analytics Page 🛠️
+### Player Detail
 
-======================================
+-> Link to [Edit Player](#edit-player)
 
-# Players Comparison / Analytics Page 🛠️
+1. Quick Glance
+   - Highest Score
+   - Average Score
+   - Week Streak
+   - Total Points
+2. Score History
+   - Line Chart
+   - Tournament History Table
+     -> Row Link to [Team Tournament Detail](#team-tournament-detail)
 
-======================================
+### Player Comparison
+
+---
 
 # Ideas
 
-- Table Improvements
-- - Filter Tables Features (Search ish)
+- Login Feature
 
-- Login features
-- - easier access to own scores and own team scores
-- - Weekly Score Goal / Ring to Fill
+  - Upload Scores
+  - Dashboard (Quick access to Stats)
+  - Weekly Score Goal
 
-- Better Scanning
-- - Support different aspect ratios
-- - Separators between inputs to aid in data input
-
-- Add Upload Brillance / Personal Stats
-
-======================================
+- Improve Score Upload Experience
+  - Different Aspect Ratios
+- Track Brilliance and Helps
 
 # Bugs
 
-- Edit Tournament Button overflow on small screens
+- Edit Tournament Button overflows on small screens

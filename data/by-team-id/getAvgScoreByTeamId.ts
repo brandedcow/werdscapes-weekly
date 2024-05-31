@@ -14,15 +14,15 @@ export default async function getAvgScoreByTeamId(teamId: string) {
         all_time as (
           select
             avg("scoreTotal") as all_time_average_score
-          from "Tournament" 
-            join "Team" on "teamName" = "Team".name
+          from "TeamTournament" 
+            join "Team" on "teamId" = "Team".id
           where 
             "Team".id = ${teamId}
         ),
         last_month as (
           select avg("scoreTotal") as last_month_average_score
-          from "Tournament"
-            join "Team" on "teamName" = "Team".name
+          from "TeamTournament"
+            join "Team" on "teamId" = "Team".id
           where "Team".id = ${teamId}
             and week between now() - interval '4 week' and now()
         )

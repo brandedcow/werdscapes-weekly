@@ -14,22 +14,20 @@ export default async function getParticipationByTeamId(teamId: string) {
         active_percentages as (
           select
             t.week,
-            t.type,
-            t."teamName",
+            t."teamId",
             count(distinct s.id) filter (where s.score != 0) as acive_players,
             count(distinct s.id) as total_players,
             ROUND((COUNT(DISTINCT s.id) FILTER (WHERE s.score != 0) * 100.0) / COUNT(DISTINCT s.id), 2) AS active_percent
           from
-            "Tournament" t
-            join "Score" s on t.id = s."tournamentId"
-            join "Team" on "teamName" = "Team".name 
+            "TeamTournament" t
+            join "TournamentScore" s on t.id = s."teamTournamentId"
+            join "Team" on "teamId" = "Team".id 
           where
-            "Team".id = 'clw9t898n0000e67dcx4bksfs'
+            "Team".id = ${teamId}
           group by
             t.id,
             t.week,
-            t.type,
-            t."teamName"
+            t."teamId"
         ),
         all_time as (
           select
