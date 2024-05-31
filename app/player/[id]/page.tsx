@@ -11,6 +11,7 @@ import getPlayerById from "@/data/by-player-id/getPlayerById";
 import { PlayerTournamentScoresTable } from "@/components/shared/tables/player-tournament-scores-table/container";
 import { PlayerScoreLineChart } from "@/components/shared/charts/player-score-line-chart/container";
 import { DeletePlayerButton } from "@/components/shared/buttons/delete-player-button";
+import Link from "next/link";
 
 export default async function PlayerPage({
   params,
@@ -32,11 +33,13 @@ export default async function PlayerPage({
   return (
     <div className="flex flex-col gap-y-4 w-svw pr-12">
       <div className="flex justify-between items-start">
-        <div>
+        <div className="space-y-2">
           <CardTitle>⛨ {data.name}</CardTitle>
           <CardDescription>ID: {params.id}</CardDescription>
           {data.Team && (
-            <CardDescription>Team: {data.Team.name}</CardDescription>
+            <Link href={`/team/${data.teamId}`}>
+              <CardDescription>Team: {data.Team.name}</CardDescription>
+            </Link>
           )}
         </div>
         <DeletePlayerButton id={params.id} />

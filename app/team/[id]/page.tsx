@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import getTeamById from "@/data/by-team-id/getTeamById";
+import { DeleteTeamButton } from "@/components/shared/buttons/delete-team-button";
 
 export default async function TeamPage({ params }: { params: { id: string } }) {
   const { success, data } = await getTeamById(params.id);
@@ -26,8 +27,13 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="flex flex-col gap-y-4 w-svw pr-12">
-      <CardTitle>⛨ {data.name}</CardTitle>
-      <CardDescription>ID: {params.id}</CardDescription>
+      <div className="flex justify-between items-start">
+        <div className="space-y-2">
+          <CardTitle>⛨ {data.name}</CardTitle>
+          <CardDescription>ID: {params.id}</CardDescription>
+        </div>
+        <DeleteTeamButton id={params.id} />
+      </div>
       <QuickGlanceCard type="team" id={params.id} />
 
       <Card>
