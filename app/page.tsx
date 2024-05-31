@@ -22,14 +22,14 @@ export default function Home() {
           </ScrollArea>
         </CardContent>
       </Card>
-      <Card>
+      {/* <Card>
         <CardHeader>
           <CardTitle>Latest Individual Tournaments</CardTitle>
         </CardHeader>
         <CardContent>
           <IndividualTournamentTable limit={10} />
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }

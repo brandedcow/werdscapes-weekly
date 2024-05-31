@@ -55,8 +55,7 @@ Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see resul
 
 ### Dashboard (WIP)
 
-1. Weekly Goal
-   -
+1. ## Weekly Goal
 2. [Player Detail](#player-detail)
    - Quick Glance
    - Score History
@@ -131,6 +130,8 @@ Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see resul
 ---
 
 ### Player Detail
+
+-> Link to [Edit Player](#edit-player)
 
 1. Quick Glance
    - Highest Score

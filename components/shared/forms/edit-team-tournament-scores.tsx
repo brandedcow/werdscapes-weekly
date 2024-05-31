@@ -70,7 +70,6 @@ export function EditTeamTournamentScoresForm({
   };
 
   const handleSubmit = async (values: editTeamTournamentScoresFormValues) => {
-    console.log("submit");
     const { success, data } = await updateTeamTournamentScores({
       tournamentId,
       teamId,

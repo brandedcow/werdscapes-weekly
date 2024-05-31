@@ -20,7 +20,7 @@ export async function deleteTeamTournament(id: string) {
     )}`;
     return { success: true, data: message };
   } catch (error) {
-    console.warn("deleteTournament", JSON.stringify(error, null, 2));
+    console.warn("deleteTeamTournament", JSON.stringify(error, null, 2));
     return {
       success: false,
       error: "Something went wrong deleting the tournament.",

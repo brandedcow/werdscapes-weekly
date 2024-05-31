@@ -10,6 +10,7 @@ import {
 import getPlayerById from "@/data/by-player-id/getPlayerById";
 import { PlayerTournamentScoresTable } from "@/components/shared/tables/player-tournament-scores-table/container";
 import { PlayerScoreLineChart } from "@/components/shared/charts/player-score-line-chart/container";
+import { DeletePlayerButton } from "@/components/shared/buttons/delete-player-button";
 
 export default async function PlayerPage({
   params,
@@ -30,8 +31,16 @@ export default async function PlayerPage({
 
   return (
     <div className="flex flex-col gap-y-4 w-svw pr-12">
-      <CardTitle>⛨ {data.name}</CardTitle>
-      <CardDescription>ID: {params.id}</CardDescription>
+      <div className="flex justify-between items-start">
+        <div>
+          <CardTitle>⛨ {data.name}</CardTitle>
+          <CardDescription>ID: {params.id}</CardDescription>
+          {data.Team && (
+            <CardDescription>Team: {data.Team.name}</CardDescription>
+          )}
+        </div>
+        <DeletePlayerButton id={params.id} />
+      </div>
 
       <QuickGlanceCard type="player" id={params.id} />
 
@@ -42,7 +51,7 @@ export default async function PlayerPage({
         <CardContent>
           <PlayerScoreLineChart playerId={params.id} />
           {data.teamId && (
-            <PlayerTournamentScoresTable playerId={params.id} limit={4} />
+            <PlayerTournamentScoresTable playerId={params.id} limit={10} />
           )}
         </CardContent>
       </Card>

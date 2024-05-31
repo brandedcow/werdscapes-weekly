@@ -10,6 +10,11 @@ export default async function getTournamentScoresByPlayerId(id: string) {
         TeamTournament: true,
         Player: true,
       },
+      orderBy: {
+        TeamTournament: {
+          week: "asc",
+        },
+      },
     });
 
     return { success: true, data };

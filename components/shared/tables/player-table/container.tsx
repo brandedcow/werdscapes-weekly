@@ -12,8 +12,6 @@ type TeamTableProps = {
 export async function PlayerTable({ teamId, limit, ...props }: TeamTableProps) {
   const { success, data } = await getPlayers();
 
-  console.log(data);
-
   if (!success || !data || data.length === 0) {
     return (
       <NoDataFound

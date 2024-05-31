@@ -22,7 +22,7 @@ export async function TeamMemberTable({
     FROM "Player" p
     INNER JOIN "TournamentScore" s ON p.id = s."playerId"
     where p."teamId" = ${teamId}
-    GROUP BY p.id, p.name
+    GROUP BY p.id, name
     ORDER BY "totalScore" desc;
   `;
 
