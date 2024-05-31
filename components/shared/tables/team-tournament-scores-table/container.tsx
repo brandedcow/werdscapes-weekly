@@ -49,7 +49,7 @@ export async function TeamTournamentScoresTable({
       ...score,
       playerName: score.Player.name,
       score: score.score,
-      href: `/players/${score.Player.id}`,
+      href: `/player/${score.Player.id}`,
       place: index + 1,
     })
   );

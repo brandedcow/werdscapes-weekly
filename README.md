@@ -127,6 +127,10 @@ Wordscapes weekly is a companion app for Wordscapes. Play, upload, and see resul
 
 ### Team Performance Analytics
 
+1. Graph of Different Stats
+   - Participation percent over time
+   - Average Score over time
+
 ---
 
 ### Player Detail

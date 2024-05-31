@@ -86,6 +86,7 @@ export const uploadTeamTournamentScores = async (
       }
     );
 
+    // TODO: Update results.length to reflect correct number of scores updated
     const message = `Created ${results.length} new scores for ${
       team.name
     } on ${format(new Date(week), "MMM d, y")}.`;
