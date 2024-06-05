@@ -16,7 +16,7 @@ export default async function getParticipationByTournamentId(id: string) {
           from
             "TournamentScore"
           where
-            "teamTournamentId" = 'clwmdlkdg00kcu58bumunixn1'
+            "teamTournamentId" = ${id}
         )
         select
           active_players, total_players
