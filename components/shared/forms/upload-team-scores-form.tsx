@@ -169,6 +169,8 @@ export default function UploadTeamTournamentScoresForm() {
     form.setValue("place", place);
   }, [place, data, append, form, team, replace]);
 
+  // TODO: selecting week and place sometimes creates errors in validation: console.log(form.getValues().week);
+
   return (
     <Form {...form}>
       <form
