@@ -31,9 +31,13 @@ export default async function getAvgScoreByTeamId(teamId: string) {
 
     const parsed = {
       lastMonth:
-        results.length != 1 ? 0 : Number(results[0].last_month_average_score),
+        results.length != 1
+          ? 0
+          : Math.round(Number(results[0].last_month_average_score) * 100) / 100,
       allTime:
-        results.length != 1 ? 0 : Number(results[0].all_time_average_score),
+        results.length != 1
+          ? 0
+          : Math.round(Number(results[0].all_time_average_score) * 100) / 100,
     };
     return { success: true, data: parsed };
   } catch (error) {

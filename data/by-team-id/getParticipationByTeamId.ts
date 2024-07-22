@@ -45,9 +45,13 @@ export default async function getParticipationByTeamId(teamId: string) {
 
     const parsed = {
       lastMonth:
-        results.length != 1 ? 0 : Number(results[0].participation_last_month),
+        results.length != 1
+          ? 0
+          : Math.round(Number(results[0].participation_last_month) * 100) / 100,
       allTime:
-        results.length != 1 ? 0 : Number(results[0].participation_all_time),
+        results.length != 1
+          ? 0
+          : Math.round(Number(results[0].participation_all_time) * 100) / 100,
     };
     return { success: true, data: parsed };
   } catch (error) {
