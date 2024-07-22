@@ -54,7 +54,11 @@ export default async function PlayerPage({
         <CardContent>
           <PlayerScoreLineChart playerId={params.id} />
           {data.teamId && (
-            <PlayerTournamentScoresTable playerId={params.id} limit={10} />
+            <PlayerTournamentScoresTable
+              playerId={params.id}
+              isPaginated
+              pageSize={4}
+            />
           )}
         </CardContent>
       </Card>

@@ -37,7 +37,8 @@ export async function PlayerTournamentScoresTable({
       place: `#${score.TeamTournament?.place}`,
       href: `/team-tournament/${score.TeamTournament?.id}`,
     }))
-    .slice(0, limit);
+    .slice(0, limit)
+    .reverse();
 
   return (
     <DataTable
