@@ -105,12 +105,12 @@ export function DataTable<T>({
               legacyBehavior
             >
               <TableRow className="hover:cursor-pointer">
-                {row.getAllCells().map((cell) => (
+                {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
                     align={(cell.column.columnDef.meta as any)?.align}
                   >
-                    {cell.getValue() as string}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
               </TableRow>

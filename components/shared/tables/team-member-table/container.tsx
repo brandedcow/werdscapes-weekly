@@ -16,12 +16,14 @@ export async function TeamMemberTable({
     SELECT 
       p.id,
       p.name AS "name",
+      p."isCurrentTeam",
+      p."isLeader",
       round(AVG(s.score), 2) AS "averageScore",
       MAX(s.score) AS "personalRecord",
       SUM(s.score) AS "totalScore"
     FROM "Player" p
     INNER JOIN "TournamentScore" s ON p.id = s."playerId"
-    where p."teamId" = ${teamId}
+    where p."teamId" = ${teamId} AND p."isCurrentTeam" = true
     GROUP BY p.id, name
     ORDER BY "totalScore" desc;
   `;

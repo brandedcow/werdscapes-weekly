@@ -1,8 +1,11 @@
+"use client";
+
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 
 export type TeamMember = {
   id: string;
   name: string;
+  isLeader: boolean;
   averageScore: number;
   personalRecord: number;
   totalScore: number;
@@ -12,9 +15,23 @@ export type TeamMember = {
 const columnHelper = createColumnHelper<TeamMember>();
 
 export const teamMemberTableColumns: ColumnDef<TeamMember>[] = [
+  {
+    header: "#",
+    id: "id",
+    cell: ({ row, table }) =>
+      (table
+        .getSortedRowModel()
+        ?.flatRows?.findIndex((flatRow) => flatRow.id === row.id) || 0) + 1,
+  },
   columnHelper.accessor("name", {
     sortingFn: "alphanumeric",
     header: "Player Name",
+    cell: ({ row }) => (
+      <div className="flex row gap-1.5">
+        <p>{row.original.isLeader && "👑"}</p>
+        <p>{row.original.name}</p>
+      </div>
+    ),
   }),
   columnHelper.accessor("averageScore", {
     header: "Avg Score (4Wks)",
