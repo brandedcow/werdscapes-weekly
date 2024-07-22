@@ -16,7 +16,7 @@ export function PageHeader() {
         </h1>
       </Link>
       <div className="flex items-center gap-x-4">
-        <SignedOut>
+        {/* <SignedOut>
           <Button asChild>
             <SignInButton>Create Account</SignInButton>
           </Button>
@@ -24,7 +24,7 @@ export function PageHeader() {
         <SignedIn>
           <UploadScoresButton />
           <UserButton />
-        </SignedIn>
+        </SignedIn> */}
         <SearchIconButton />
         <DarkModeToggle />
       </div>
