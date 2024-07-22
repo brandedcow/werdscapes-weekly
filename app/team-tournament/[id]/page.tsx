@@ -38,7 +38,9 @@ export default async function TournamentDetailPage({
             "MMM d, y"
           )}`}
         </CardTitle>
-        <EditTeamTournamentButton id={params.id} />
+        <SignedIn>
+          <EditTeamTournamentButton id={params.id} />
+        </SignedIn>
       </div>
       <CardDescription>ID: {params.id}</CardDescription>
       <QuickGlanceCard type="tournament" id={params.id} />
