@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import getTeamById from "@/data/by-team-id/getTeamById";
 import { DeleteTeamButton } from "@/components/shared/buttons/delete-team-button";
+import { SignedIn } from "@clerk/nextjs";
 
 export default async function TeamPage({ params }: { params: { id: string } }) {
   const { success, data } = await getTeamById(params.id);
@@ -32,7 +33,9 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
           <CardTitle>⛨ {data.name}</CardTitle>
           <CardDescription>ID: {params.id}</CardDescription>
         </div>
-        <DeleteTeamButton id={params.id} />
+        <SignedIn>
+          <DeleteTeamButton id={params.id} />
+        </SignedIn>
       </div>
       <QuickGlanceCard type="team" id={params.id} />
 
