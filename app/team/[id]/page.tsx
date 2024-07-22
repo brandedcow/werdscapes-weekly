@@ -41,7 +41,7 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
           <CardTitle>Latest Tournaments</CardTitle>
         </CardHeader>
         <CardContent>
-          <TeamTournamentTable teamId={params.id} limit={4} />
+          <TeamTournamentTable teamId={params.id} pageSize={4} isPaginated />
         </CardContent>
       </Card>
 
