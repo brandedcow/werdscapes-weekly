@@ -12,6 +12,7 @@ import { PlayerTournamentScoresTable } from "@/components/shared/tables/player-t
 import { PlayerScoreLineChart } from "@/components/shared/charts/player-score-line-chart/container";
 import { DeletePlayerButton } from "@/components/shared/buttons/delete-player-button";
 import Link from "next/link";
+import { SignedIn } from "@clerk/nextjs";
 
 export default async function PlayerPage({
   params,
@@ -42,7 +43,9 @@ export default async function PlayerPage({
             </Link>
           )}
         </div>
-        <DeletePlayerButton id={params.id} />
+        <SignedIn>
+          <DeletePlayerButton id={params.id} />
+        </SignedIn>
       </div>
 
       <QuickGlanceCard type="player" id={params.id} />
