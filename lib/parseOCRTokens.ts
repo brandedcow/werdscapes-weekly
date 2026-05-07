@@ -7,40 +7,51 @@ export type ParseOCRTokenResult = {
 export function parseOCRTokens(
   ocrResult: OcrSpaceResponse
 ): ParseOCRTokenResult {
-  let tokens = ocrResult.ParsedResults[0].ParsedText.split("\t")
-    .map((token) => token.replace("\r\n", ""))
-    .filter((token) => token !== "" && token !== "0")
-    .filter((token) => /^[A-Za-z0-9]*$/.test(token));
+  if (!ocrResult || !ocrResult.ParsedResults || ocrResult.ParsedResults.length === 0) {
+    return {};
+  }
 
-  const adjustedTokens = pairElements(addZeroScores(tokens));
+  const rawText = ocrResult.ParsedResults[0].ParsedText;
+  // Split by tabs and newlines
+  const tokens = rawText.split(/[\t\r\n]+/)
+    .map(t => t.trim())
+    .filter(t => t !== "" && t !== "0");
 
-  return adjustedTokens.reduce<{ [id: string]: string }>((acc, curr) => {
-    const [id, score] = curr;
-    if (acc[id] === undefined) {
-      acc[id] = score;
+  const results: ParseOCRTokenResult = {};
+  
+  // Strategy: Find tokens that look like scores (numbers with optional commas)
+  // and pair them with the most likely name token before them.
+  // Usually the format is [Name, Junk/Rank, Score] or [Name, Score].
+  
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    const cleanScore = token.replace(/,/g, "");
+    
+    // Check if it's a number (the score)
+    if (/^\d+$/.test(cleanScore) && cleanScore.length >= 1) {
+      // Look back for a name. A name is usually non-numeric.
+      // We look at the immediate predecessor first.
+      let name = "";
+      if (i > 0) {
+        // If the predecessor is not a number, it's likely the name.
+        if (!/^\d+$/.test(tokens[i-1].replace(/,/g, ""))) {
+          name = tokens[i-1];
+        } else if (i > 1 && !/^\d+$/.test(tokens[i-2].replace(/,/g, ""))) {
+          // If the predecessor is a number (maybe a rank or mid-score), check one further back.
+          name = tokens[i-2];
+        }
+      }
+      
+      if (name && name.length > 1) {
+        // Only update if it's a higher score or first time seeing name
+        const currentScore = parseInt(results[name] || "0");
+        const newScore = parseInt(cleanScore);
+        if (newScore > currentScore) {
+          results[name] = cleanScore;
+        }
+      }
     }
-    return acc;
-  }, {});
-}
-
-function addZeroScores(tokens: string[]) {
-  const scoresToAdd = 12 - tokens.length;
-  if (scoresToAdd === 0) {
-    return tokens;
   }
 
-  const tokensWithoutScores = tokens.slice(-scoresToAdd);
-  const addZeroScores = [...tokensWithoutScores.flatMap((id) => [id, "0"])];
-  const updatedTokens = [...tokens.slice(0, -scoresToAdd), ...addZeroScores];
-  return updatedTokens;
-}
-
-function pairElements(array: any[]) {
-  let newArray: any[] = [];
-
-  for (let index = 0; index < array.length; index += 2) {
-    const tuple = [array[index], array[index + 1]];
-    newArray.push(tuple);
-  }
-  return newArray;
+  return results;
 }
